@@ -32,3 +32,7 @@ Features in the final product include a choice between different assets and inve
 4.) The investors will be able to diversify their portfolio within minutes and get their portfolio curated and diversified.
 
 5.) Portfolio Curation will be based on certain algorithms which will include past performances of the assets throughout their inception. 
+
+###Flow Diagram
+![image](https://user-images.githubusercontent.com/93005927/228363010-d66da171-05c4-4d0a-a259-cb6655a975e8.png)
+
