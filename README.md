@@ -20,3 +20,15 @@ A system that can suggest you an investment  portfolio based on your risk appeti
 4.) To assess the overall market sentiment related to a particular asset and combining it with strong fundamentals.
 
 5.) To reduce the user involvement, effort and time required to research about an asset by recommendation.
+
+### Scope
+1.) Assets such as stocks, mutual funds, real estate, public funds, ETFs, and other options will be included for the users to get suggestions from
+Features in the final product include a choice between different assets and investing options/suggestions with proportions mentioned by the investor.
+
+2.) The questions include the capital available for investment, the proportions of assets allocation, risk appetite based on assets, the time period for returns, and the number of returns expected after a certain time.
+
+3.) Asset management with minimal user research or in most cases just by getting updated by the news.
+ 
+4.) The investors will be able to diversify their portfolio within minutes and get their portfolio curated and diversified.
+
+5.) Portfolio Curation will be based on certain algorithms which will include past performances of the assets throughout their inception. 
