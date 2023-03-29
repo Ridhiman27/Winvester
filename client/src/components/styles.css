@@ -1,0 +1,118 @@
+/* Login Page */
+.loginImage {
+    height: 45.2vh;
+    width: 59.94vw;
+    left: 5vw;
+    position: relative;
+}
+
+.loginComponent {
+    overflow: hidden;
+}
+
+.loginContainer {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    position: relative;
+    top: 27vh;
+}
+
+.loginTextArea {
+    display: flex;
+    padding-left: 10vw;
+    align-items: center;
+    text-align: center;
+    /* margin: auto;
+    padding: auto;
+    margin-top: 8vh; */
+    position: relative;
+    left: 5vw;
+    justify-content: center;
+}
+
+
+.inputGroup {
+    position: relative;
+    left: 20vh;
+    padding: 5vh;
+    padding-bottom: 12vh;
+    border: 1px solid rgb(230, 230, 230);
+    border-radius: 20px;
+    box-shadow:
+  0px 0.8px 7.8px rgba(0, 0, 0, 0.013),
+  0px 1.7px 17.2px rgba(0, 0, 0, 0.019),
+  0px 2.9px 28.8px rgba(0, 0, 0, 0.023),
+  0px 4.3px 43.4px rgba(0, 0, 0, 0.027),
+  0px 6.3px 62.6px rgba(0, 0, 0, 0.03),
+  0px 8.9px 88.6px rgba(0, 0, 0, 0.033),
+  0px 12.6px 125.7px rgba(0, 0, 0, 0.037),
+  0px 18.3px 182.5px rgba(0, 0, 0, 0.041),
+  0px 28.1px 281.3px rgba(0, 0, 0, 0.047),
+  0px 50px 500px rgba(0, 0, 0, 0.06)
+  ;
+}
+
+
+
+.loginInput {
+    background: #EAF0F7;
+    border-radius: 10px;
+    width: 20vw;
+    height: 6vh;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-family: "Poppins";
+    color: #4F555A;
+}
+
+.passwordInput {
+    background: #EAF0F7;
+    border-radius: 10px;
+    width: 20vw;
+    height: 6vh;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-family: "Poppins";
+    color: #4F555A;
+}
+
+.loginButton {
+    font-size: 18px;
+    font-family: "Poppins";
+    width: 20vw;
+    height: 6vh;
+    background: #00D54B;
+    box-shadow: 0px 12px 21px 4px rgba(68, 97, 242, 0.15);
+    border-radius: 10px;
+    border: 1px solid transparent;
+    position: relative;
+    top: 7.5vh;
+}
+
+.recoverPasswordText {
+    color: #C7C7C7;
+    text-decoration:underline;
+    font-size: 14px;
+    font-family: "Poppins";
+    font-weight: 500;
+    text-align: right;
+}
+
+.sideImage2{
+    position: absolute;
+width: 475px;
+height: 257px;
+left: 0px;
+top: 650px;
+}
+.sideImage1{
+    position: absolute;
+width: 475px;
+height: 257px;
+right: 0px;
+top: 650px;
+}
+
+/* Login Page */
