@@ -1,7 +1,7 @@
 /* Login Page */
 .loginImage {
-    height: 45.2vh;
-    width: 59.94vw;
+    height: 18em;
+    width: 50em;
     left: 5vw;
     position: relative;
 }
@@ -35,7 +35,7 @@
 
 .inputGroup {
     position: relative;
-    left: 20vh;
+    /* left: 1em; */
     padding: 5vh;
     padding-bottom: 12vh;
     border: 1px solid rgb(230, 230, 230);
@@ -52,6 +52,7 @@
   0px 28.1px 281.3px rgba(0, 0, 0, 0.047),
   0px 50px 500px rgba(0, 0, 0, 0.06)
   ;
+  height: 45vh;
 }
 
 
@@ -102,17 +103,17 @@
 
 .sideImage2{
     position: absolute;
-width: 475px;
-height: 257px;
+width: 24.73vw;
+height: 23.79vh;
 left: 0px;
-top: 650px;
+top: 75vh;
 }
 .sideImage1{
     position: absolute;
-width: 475px;
-height: 257px;
+width: 24.73vw;
+height: 23.79vh;
 right: 0px;
-top: 650px;
+top: 75vh;
 }
 
 /* Login Page */
