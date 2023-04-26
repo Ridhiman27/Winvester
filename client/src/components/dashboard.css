@@ -1,0 +1,25 @@
+.dashboard-container {
+    height: 100vh;
+    width: 100vw;
+    background: black;
+    position: absolute;
+}
+
+.left-navigation {
+    height: 100vh;
+    width: 20vw;
+    background: linear-gradient(180deg, #7C1F13 0%, rgba(0, 0, 0, 0.25) 0.01%, rgba(86, 218, 136, 0.166667) 59.37%, rgba(78, 255, 159, 0) 100%);
+    ;
+    position: relative;
+}
+
+.assets-container {
+    height: 83vh;
+    width: 20vw;
+    background: #2A2A2D;
+    border-radius: 20px;
+}
+
+.tradingView iframe{
+    border-radius: 20px;
+}
