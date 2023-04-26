@@ -8,7 +8,7 @@ import Home from "./components/Home.jsx";
 function App() {
   return (
     <>
-      <Router >
+      <Router>
           <Routes>
             <Route path="/" element={<Home/>} />
             <Route path='/login' element={<Login/>} />
