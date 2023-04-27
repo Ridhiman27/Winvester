@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import Form from "./components/Form";
 import Dashboard from "./components/Dashboard.jsx";
 import Home from "./components/Home.jsx";
+import Signup from './components/Signup';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Router>
           <Routes>
             <Route path="/" element={<Home/>} />
+            <Route path='/signup' element={<Signup/>} />
             <Route path='/login' element={<Login/>} />
             <Route path="/form" element={<Form/>} />
             <Route path="/dashboard" element={<Dashboard/>} />
