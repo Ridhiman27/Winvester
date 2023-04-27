@@ -3,26 +3,57 @@ import "./dashboard.css";
 import TradingView from "./TradingView";
 import RiskMeter from './dashComponents/RiskMeter.jsx';
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+const auth = getAuth();
 
 
 
-function Dashboard() {
+const Dashboard = () => {
+
+  const navigate = useNavigate();
+
+  const [formData,setFormData] = useState(undefined);
+  const [email,setEmail] = useState("");
   
   useEffect(()=>{
-    axios.get("https://script.google.com/macros/s/AKfycbwNDH8iTJl6LT-bEp16QMWfADiGqSWpH9ZbEpuL76IswiafUQ424BC5Jtjk5134E7K_bw/exec")
-    .then((response) => console.log(response.data.data[0]))
-    .catch((error)=>console.error(error))
-  })
 
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        let tempEmail = user.email;
+        setEmail(String(tempEmail));
+        // const uid = user.uid;
+        // ...
+      } else {
+        alert(`Login to get personalized data`);
+        navigate("/login")
+      }
+    });
 
-  // useEffect(()=>{
-  //   try {
-  //     const response = axios.request(options);
-  //     console.log(response.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // },[]);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("https://script.google.com/macros/s/AKfycbwNDH8iTJl6LT-bEp16QMWfADiGqSWpH9ZbEpuL76IswiafUQ424BC5Jtjk5134E7K_bw/exec");
+        setFormData(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  },[])
+  
+  // console.log(formData);
+
+  let mainIndex;
+  const searchEmail = () => {
+      for (let i = 0; i < formData.length; i++) {
+          if(formData[i][8] === email){
+            mainIndex = i;
+          }
+      }
+    }
+  if(formData != undefined) {searchEmail()};
+  
 
   return (
     <div className="dashboard-container">
