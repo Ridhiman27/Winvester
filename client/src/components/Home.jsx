@@ -15,10 +15,9 @@ const Home = () => {
             <div class="wrapper">
                 <ul>
                     <li><a href="/login">Login</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Gallery</a></li>
-                    <li><a href="#">Feedback</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/form">Form</a></li>
+                    <li><a href="#">Logout</a></li>
                 </ul>
             </div>
             <div className="container1">
