@@ -21,3 +21,7 @@ for i in range(len(nifty_50_symbols)):
 result = pd.concat(frames)
 print(result)
 result.to_csv("stocks.csv")
+
+
+
+
