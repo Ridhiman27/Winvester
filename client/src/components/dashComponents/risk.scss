@@ -1,0 +1,121 @@
+
+.general-wrapper {
+    height: 100%;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  /* ------ Default Style ---------- */
+  .gauge-container {
+    width: 150px;
+    height: 80px;
+    display: block;
+    float: left;
+    padding: 10px;
+    background-color: #222;
+    margin: 7px;
+    border-radius: 3px;
+    position: relative;
+  }
+  .gauge-container > .label {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.5);
+    font-family: monospace;
+    font-size: 0.8em;
+    padding: 5px 10px;
+  }
+  
+  .wrapper1 {
+    height: 100px;
+    float: left;
+    margin: 7px;
+    overflow: hidden;
+  }
+  .wrapper1 > .gauge-container {
+    margin: 0;
+  }
+  
+  /* SVG Path implementation */
+  
+  .progress {
+    &__background {
+      height: 80px;
+      background-color: #898989;
+    }
+  }
+  
+  .svg-gauge {
+    &__container {
+      position: relative;
+      height: 150px;
+    }
+    &__paths {
+      margin: 20px auto 10px;
+      height: 80px;
+      svg {
+        fill: transparent;
+      }
+      svg path {
+        transition: 0.3s;
+      }
+    }
+    input {
+      width: 30%;
+      margin: auto;
+      display: block;
+      background-color: #343434;
+      color: white;
+      text-align: center;
+      border-radius: 6px;
+      border: black;
+    }
+  }
+  
+  .dashed {
+    svg {
+      height: 85px;
+      margin: 20px auto;
+      display: block;
+    }
+  
+    path {
+      stroke-linecap: round;
+    }
+  
+    path.meter-back-path {
+      stroke: grey;
+      stroke-width: 2;
+    }
+  
+    path.meter-value {
+      stroke-width: 8;
+      stroke: url(#gradient);
+      stroke-dasharray: 126 500;
+      stroke-dashoffset: 126;
+      animation: dash 3s 0.5s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+    }
+  
+    path.white {
+      stroke: #ffffff;
+      stroke-dasharray: 0px, 198px;
+      stroke-dashoffset: 198;
+      stroke-width: 3.5px;
+      animation: dash 3s 0.5s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+    }
+  
+    @keyframes dash {
+      to {
+        stroke-dashoffset: 1; /* <---- changed to "1" from "0"  */
+      }
+    }
+  }
+  

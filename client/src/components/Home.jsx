@@ -5,21 +5,12 @@ import home3 from "../assets/home3.png";
 import home4 from "../assets/home4.png";
 import home5 from "../assets/home5.png";
 import "./landing.css";
+import Navbar from "./Navbar"
 
 const Home = () => {
     return (
         <div className="home-container">
-            <input type="checkbox" id="active" />
-            <label for="active" class="menu-btn"><span></span></label>
-            <label for="active" class="close"></label>
-            <div class="wrapper">
-                <ul>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/dashboard">Dashboard</a></li>
-                    <li><a href="/form">Form</a></li>
-                    <li><a href="#">Logout</a></li>
-                </ul>
-            </div>
+           <Navbar/>
             <div className="container1">
                 <img src={home1} alt="" className="home1" />
             </div>
