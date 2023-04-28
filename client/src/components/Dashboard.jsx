@@ -39,25 +39,22 @@ const Dashboard = () => {
       try {
         const response = await axios.get("https://script.google.com/macros/s/AKfycbwNDH8iTJl6LT-bEp16QMWfADiGqSWpH9ZbEpuL76IswiafUQ424BC5Jtjk5134E7K_bw/exec");
         setFormData(response.data.data);
+       
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-
-
-    const searchEmail = () => {
+    
+  }, [])
+    
+  useEffect(()=>{
+    if (formData && formData.length) {
       for (let i = 1; i < formData.length; i++) {
         if (formData[i][8] == email) {
           setMainIndex(i);
         }
       }
-    }
-    if (formData != undefined) { searchEmail(); };
-
-    const calculateRiskScore = () => {
-
-      // Assign risk values to questions
       const riskValues = {
         secureIncome: {
           "Very Stable": 10,
@@ -114,54 +111,40 @@ const Dashboard = () => {
           moreThan50k: 30
         }
       };
-
-      const financiallyDependent = () => {
+  
+      let financiallyDependent ;
         if (formData[mainIndex][2] == 0) {
-          return 10;
+          financiallyDependent =  10;
         } else if (formData[mainIndex][2] < 5 && formData[mainIndex][2] > 0) {
-          return 20;
+          financiallyDependent =  20;
         } else {
-          return 30;
+          financiallyDependent =  30;
         }
-      }
-
-      const investmentHorizon = () => {
+  
+      let investmentHorizon;
         if (formData[mainIndex][5] <= 3) {
-          return 10;
+          investmentHorizon = 10;
         } else if (formData[mainIndex][5] >= 4 && formData[mainIndex][5] <= 7) {
-          return 20;
+          investmentHorizon =  20;
         } else {
-          return 30;
+          investmentHorizon =  30;
         }
-      }
-
+  
       // Calculate risk score
-      // const tempScore = riskValues.secureIncome[formData[mainIndex][0]]
-      //   + riskValues.emiAllocation[formData[mainIndex][2]]
-      //   + riskValues.stockInvestmentPreference[formData[mainIndex][3]]
-      //   + riskValues.riskAppetite[formData[mainIndex][5]]
-      //   + riskValues.portfolioAllocation[formData[mainIndex][6]]
-      //   + financiallyDependent + investmentHorizon;
-      // setRiskScore(tempScore);
-      // Return risk score
-      
-      // return riskScore;
+      const tempScore = riskValues.secureIncome[formData[mainIndex][1]]
+        + riskValues.emiAllocation[formData[mainIndex][3]]
+        + riskValues.stockInvestmentPreference[formData[mainIndex][4]]
+        + riskValues.riskAppetite[formData[mainIndex][6]]
+        + riskValues.portfolioAllocation[formData[mainIndex][7]]
+        + financiallyDependent + investmentHorizon;
+      setRiskScore(tempScore);
+      // // Return risk score
+      console.log(riskScore);
     }
-
-    calculateRiskScore();
-
-  }, [])
-
-
-
-
-
-  // Call the function to calculate the risk score
-  // const riskScore = calculateRiskScore();
-
-  // // Log the risk score to the console
-
-
+  },[formData])
+  
+  
+  
 
 
   return (
