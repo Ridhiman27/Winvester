@@ -11,14 +11,6 @@ mf = Mftool()
 # print(value)
 
 
-
-
-
-
-
-
-
-
 # data
 mutual_funds_dict = {
  	'119551': 'Aditya Birla Sun Life Banking & PSU Debt Fund  - DIRECT - IDCW',
