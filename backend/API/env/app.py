@@ -4,10 +4,11 @@ import pickle
 import pandas as pd
 import numpy as np
 import scipy.optimize as sco
-from flask_cors import CORS
+import flask_cors
+import json
 
 app = Flask(__name__)
-CORS(app)
+flask_cors.CORS(app)
 model = pickle.load(open('ADANIPORTS', 'rb'))
 
 # list_csv = sorted(os.listdir("Nifty50"))
@@ -15,6 +16,8 @@ model = pickle.load(open('ADANIPORTS', 'rb'))
 # df = pd.read_csv("ADANIPORTS.csv")
 data = pd.read_csv("ADANIPORTS.csv")
 values = data[['Open', 'High', 'Low', 'Close']].values
+
+
 
 
 @app.route('/risk-calculation')
@@ -85,6 +88,8 @@ def mpt():
             mutualFunds += result.x[i]
         else:
             goldList = f"{data.columns[i]} : {result.x[i]:.2%}"
+            global gold
+            gold = result.x[i]
             print(f'{data.columns[i]} : {result.x[i]:.2%}')
         # print(f'{data.columns[i]}: {result.x[i]:.2%}')
     print(f"Stock : {stock:.2%}")
@@ -102,6 +107,10 @@ def mpt():
     # Print expected return and standard deviation for optimal portfolio
 
     resultArray = [f"Stock : {stock:.2%}",f"Mutual Funds: {mutualFunds:.2%}",goldList,f'Expected return: {optimal_return:.2%}',f'Standard deviation: {optimal_std_dev:.2%}']
+    global pie_stock, pie_mf, pie_gold
+    pie_stock = stock
+    pie_mf = mutualFunds
+    pie_gold = gold
     
     print(f'Expected return: {optimal_return:.2%}')
     print(f'Standard deviation: {optimal_std_dev:.2%}')
@@ -121,6 +130,7 @@ def returnPrediction():
 def hello():
     str1 = "hello world!"
     return jsonify(str1)
+
 
 
 if __name__ == "__main__":

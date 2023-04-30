@@ -1,121 +1,164 @@
+// ===================Semi Donut Chart model-1========================
 
-.general-wrapper {
-    height: 100%;
-    margin: 0 auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  
-  /* ------ Default Style ---------- */
-  .gauge-container {
-    width: 150px;
-    height: 80px;
-    display: block;
-    float: left;
-    padding: 10px;
-    background-color: #222;
-    margin: 7px;
-    border-radius: 3px;
-    position: relative;
-  }
-  .gauge-container > .label {
+.semi-donut{
+  --percentage: 0;
+  --fill: #ff0;
+  width: 300px;
+  height: 150px;
+  position: relative;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 600;
+  overflow: hidden;
+  color: var(--fill);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  box-sizing : border-box;
+  &:after{
+    content: '';
+    width: 300px;
+    height: 300px;
+    border:50px solid;
+    border-color : rgba(0,0,0,0.15) rgba(0,0,0,0.15) var(--fill) var(--fill);
     position: absolute;
-    right: 0;
+    border-radius: 50%;
+    left: 0;
     top: 0;
-    display: inline-block;
-    background: rgba(0, 0, 0, 0.5);
-    font-family: monospace;
-    font-size: 0.8em;
-    padding: 5px 10px;
+    box-sizing : border-box;
+    transform: rotate( calc( 1deg * ( -45 + var(--percentage) * 1.8 ) ) );
+    animation : fillAnimation 1s ease-in;
   }
-  
-  .wrapper1 {
-    height: 100px;
-    float: left;
-    margin: 7px;
-    overflow: hidden;
+}
+
+
+// ===================Semi Donut Chart model-2========================
+
+.semi-donut-model-2{
+  width: 300px;
+  height: 150px;
+  position: relative;
+  text-align: center;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 600;
+  border-radius: 150px 150px 0 0;
+  overflow: hidden;
+  color: var(--fill);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  box-sizing : border-box;
+  &:before, &:after{
+    content: '';
+    width: 300px;
+    height: 150px;
+    border:50px solid var(--fill);
+    border-top: none;
+    position: absolute;
+    transform-origin :50%  0% 0;
+    border-radius: 0 0 300px 300px ;
+    box-sizing : border-box;
+    left: 0;
+    top: 100%;
   }
-  .wrapper1 > .gauge-container {
-    margin: 0;
+  &:before {
+    border-color:rgba(0,0,0,.15);
+    transform: rotate(180deg);
   }
-  
-  /* SVG Path implementation */
-  
-  .progress {
-    &__background {
-      height: 80px;
-      background-color: #898989;
-    }
+  &:after{
+      z-index: 3;
+     animation : 1s fillGraphAnimation ease-in;
+    transform: rotate( calc( 1deg * ( var(--percentage) * 1.8 ) ) );
   }
-  
-  .svg-gauge {
-    &__container {
-      position: relative;
-      height: 150px;
-    }
-    &__paths {
-      margin: 20px auto 10px;
-      height: 80px;
-      svg {
-        fill: transparent;
+  &:hover{
+     &:after{
+        opacity: .8;
+        cursor: pointer;
       }
-      svg path {
-        transition: 0.3s;
+  }
+}
+
+// ===================Multi Semi Donut Chart ========================
+
+.multi-graph{
+  width: 300px;
+  height: 150px;
+  position: relative;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 600;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing : border-box;
+   &:before{
+    content: '';
+    width: 300px;
+    height: 150px;
+    border:50px solid rgba(0,0,0,.15);
+    border-bottom: none;
+    position: absolute;
+    box-sizing : border-box;
+    transform-origin: 50%  0%;
+    border-radius: 300px 300px 0 0 ;
+    left: 0;
+    top: 0;
+  }
+  .graph{
+    width: 300px;
+    height: 150px;
+    border:50px solid var(--fill);
+    border-top: none;
+    position: absolute;
+    transform-origin :50%  0% 0;
+    border-radius: 0 0 300px 300px ;
+    left: 0;
+    top: 100%;
+    z-index: 5;
+    animation : 1s fillGraphAnimation ease-in;
+    transform: rotate( calc( 1deg * ( var(--percentage) * 1.8 ) ) );
+    box-sizing : border-box;
+    cursor: pointer;
+    &:after{
+      // content: attr(data-name) ;
+      content: attr(data-name) ' ' counter(varible) '%';
+      counter-reset: varible var(--percentage);
+      background: var(--fill) ;
+      box-sizing : border-box;
+      border-radius : 2px;
+      color: #fff;
+      font-weight: 200;
+      font-size: 12px;
+      height: 20px;
+      padding: 3px 5px;
+      top: 0px;
+      position: absolute;
+      left: 0;
+      transform: rotate(calc( -1deg * var(--percentage) * 1.8 ))  translate(-30px , 0px);
+      transition:0.2s ease-in;
+      transform-origin: 0 50% 0;
+      opacity: 0;
+    }
+    &:hover{
+        opacity: 0.8;
+      &:after{
+        opacity: 1;
+        left: 30px;
       }
     }
-    input {
-      width: 30%;
-      margin: auto;
-      display: block;
-      background-color: #343434;
-      color: white;
-      text-align: center;
-      border-radius: 6px;
-      border: black;
-    }
   }
-  
-  .dashed {
-    svg {
-      height: 85px;
-      margin: 20px auto;
-      display: block;
-    }
-  
-    path {
-      stroke-linecap: round;
-    }
-  
-    path.meter-back-path {
-      stroke: grey;
-      stroke-width: 2;
-    }
-  
-    path.meter-value {
-      stroke-width: 8;
-      stroke: url(#gradient);
-      stroke-dasharray: 126 500;
-      stroke-dashoffset: 126;
-      animation: dash 3s 0.5s cubic-bezier(0.7, 0, 0.3, 1) forwards;
-    }
-  
-    path.white {
-      stroke: #ffffff;
-      stroke-dasharray: 0px, 198px;
-      stroke-dashoffset: 198;
-      stroke-width: 3.5px;
-      animation: dash 3s 0.5s cubic-bezier(0.7, 0, 0.3, 1) forwards;
-    }
-  
-    @keyframes dash {
-      to {
-        stroke-dashoffset: 1; /* <---- changed to "1" from "0"  */
-      }
-    }
-  }
-  
+}
+
+
+
+@keyframes fillAnimation{
+  0%{transform : rotate(-45deg);}
+  50%{transform: rotate(135deg);}
+}
+
+@keyframes fillGraphAnimation{
+  0%{transform: rotate(0deg);}
+  50%{transform: rotate(180deg);}
+}
