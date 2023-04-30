@@ -359,7 +359,7 @@ const RiskAppetite = () => {
                 <div className="col-md-auto">
                   <div className="container" style={{ background: "#2A2A2D", minHeight: "35vh", minWidth: "70vw", borderRadius: "20px" }} >
                     <div className="row">
-                      <div className="col-md-auto" style={{width:"100%"}}>
+                      <div className="col-md-auto" style={{ width: "100%" }}>
                         <div className="container" style={{ height: "20vh", alignItems: "center" }}>
                           {
                             riskScoreLoading === false ? (
@@ -377,13 +377,13 @@ const RiskAppetite = () => {
                                         <Risk percentage={riskScore} />
                                         <p style={{ color: "white", textAlign: "center", marginTop: "3vh" }}>You have moderate appetite for taking risk</p>
                                       </div>
-                                      <div className="col-md-auto" style={{marginLeft:"5vw"}}>
-                                        <div className="container" style={{ width: "35vw",marginTop:"-5vh",color:"white" }}>
-                                          <h5 style={{fontWeight:"bold"}}>What does this mean ?</h5>
+                                      <div className="col-md-auto" style={{ marginLeft: "5vw" }}>
+                                        <div className="container" style={{ width: "35vw", marginTop: "-5vh", color: "white" }}>
+                                          <h5 style={{ fontWeight: "bold" }}>What does this mean ?</h5>
                                           <ol>
                                             <li>Investing can be a complex and intimidating process, but with the right guidance and knowledge, it can be a powerful tool for creating long-term wealth. For someone with a moderate appetite for risk, there are a variety of investment options available that can help them meet their financial goals.
                                               <li>
-                                                Based on your moderate appetite for risk, there are several investment options available to you that can provide a balance between growth potential and stability. One approach is to consider a diversified portfolio that includes a mix of equities, bonds, and alternative investments such as real estate or commodities. 
+                                                Based on your moderate appetite for risk, there are several investment options available to you that can provide a balance between growth potential and stability. One approach is to consider a diversified portfolio that includes a mix of equities, bonds, and alternative investments such as real estate or commodities.
                                               </li>
                                             </li>
                                           </ol>
@@ -396,12 +396,23 @@ const RiskAppetite = () => {
                           }
                           {/* <ArcGauge value={30} /> */}
                         </div>
-                        
+
                       </div>
                     </div>
                   </div>
-                  <div className="container" style={{ background: "#2A2A2D", minHeight: "48vh", minWidth: "70vw", borderRadius: "20px",marginTop:"3vh" }} >
+                  <div className="container" style={{width:"80vw",margin:0,padding:0}}>
+                    <div className="row">
+                      <div className="col-md-auto">
+                        <div className="container" style={{ background: "#2A2A2D", minHeight: "48vh", minWidth: "32vw", borderRadius: "20px", marginTop: "2.5vh" ,padding:0}} >
                           <h1>sample</h1>
+                        </div>
+                      </div>
+                      <div className="col-md-auto">
+                        <div className="container" style={{ background: "#2A2A2D", minHeight: "48vh", minWidth: "32vw", borderRadius: "20px", marginTop: "2.5vh" ,padding:0}} >
+                          <h1>sample</h1>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
