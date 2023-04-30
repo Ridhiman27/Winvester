@@ -88,12 +88,12 @@ for keys in mutual_funds_dict:
     # df = mf.history(keys,start=None,end=None,period='5d',as_dataframe=True)
     temp = mf.get_scheme_quote(keys,as_json=False)
     tempList = []
-    tempList.append(temp["scheme_name"])
+    # tempList.append(temp["scheme_name"])
     tempList.append(temp["nav"])
     frames.append(tempList)
     # frames.append(df)
 
-df = pd.DataFrame(frames,columns=["Name","NAV"])
+df = pd.DataFrame(frames)
 print(df)
 # result = pd.concat(frames)
 # print(result)

@@ -23,13 +23,13 @@ def MPT():
     gold_data = pd.read_csv('gold.csv')
     mutual_funds_data = pd.read_csv('mutual_funds.csv')
     etfs_data = pd.read_csv('etfs.csv')
-    ppf_data = pd.read_csv('ppf.csv')
-    nps_data = pd.read_csv('nps.csv')
-    smallcase_data = pd.read_csv('smallcase.csv')
-    other_data = pd.read_csv('other.csv')
+    # ppf_data = pd.read_csv('ppf.csv')
+    # nps_data = pd.read_csv('nps.csv')
+    # smallcase_data = pd.read_csv('smallcase.csv')
+    # other_data = pd.read_csv('other.csv')
 
     # Merge data into a single DataFrame
-    data = pd.concat([stocks_data, gold_data, mutual_funds_data, etfs_data, ppf_data, nps_data, smallcase_data, other_data], axis=1)
+    data = pd.concat([stocks_data, gold_data, mutual_funds_data, etfs_data], axis=1)
 
     # Calculate returns for each asset class
     returns = data.pct_change()
