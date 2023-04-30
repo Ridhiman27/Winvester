@@ -59,6 +59,13 @@ const Dashboard = () => {
       try {
         const response = await axios.get("https://script.google.com/macros/s/AKfycbwNDH8iTJl6LT-bEp16QMWfADiGqSWpH9ZbEpuL76IswiafUQ424BC5Jtjk5134E7K_bw/exec");
         setFormData(response.data.data);
+        await axios.get("https://vedxpatel-improved-robot-x4j9pjxv6xwh5x9-5000.preview.app.github.dev/",{
+          headers: {
+            "X-Github-Token" : "ghu_GNDsLc8h7jzuKmTWu3j7QpC6MmbLMU03RY2H"
+          }
+        })
+          .then((response)=>console.log(`Portfolio segregated: ${response}` ))
+          .catch((error)=>console.error(error))
 
       } catch (error) {
         console.error(error);
