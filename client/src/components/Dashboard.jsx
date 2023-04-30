@@ -346,7 +346,7 @@ const Dashboard = () => {
 
                       </div>
                       <div className="col-md-auto">
-                        <a href="/dashboard" style={{color:"white",fontSize:"22px"}}>Risk Appetite</a>
+                        <a href="/risk-appetite" style={{color:"white",fontSize:"22px"}}>Risk Appetite</a>
                       </div>
                     </div>
                     <div className="row" style={{marginTop:"3vh",paddingTop:"10px",paddingBottom:"10px"}}>

@@ -4,6 +4,7 @@ import "./App.css"
 import Login from "./components/Login";
 import Form from "./components/Form";
 import Dashboard from "./components/Dashboard.jsx";
+import RiskAppetite from "./components/pages/RiskAppetite.jsx";
 import Home from "./components/Home.jsx";
 import Signup from './components/Signup';
 
@@ -18,6 +19,7 @@ function App() {
             <Route path='/login' element={<Login/>} />
             <Route path="/form" element={<Form/>} />
             <Route path="/dashboard" element={<Dashboard/>} />
+            <Route path="/risk-appetite" element={<RiskAppetite/>} />
           </Routes>
       </Router>
     </>
