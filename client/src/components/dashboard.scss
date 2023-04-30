@@ -27,3 +27,14 @@
 .tradingView iframe{
     border-radius: 20px;
 }
+
+.selected{
+    background: #3E784E;
+border-radius: 20px;
+}
+
+.left-navigation .row:hover{
+    background: #3E784E;
+    border-radius: 20px;
+    transition: 0.2s ease;
+}
