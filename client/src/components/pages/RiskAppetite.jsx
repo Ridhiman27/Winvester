@@ -38,6 +38,7 @@ import {
   TableContainer,
 } from '@chakra-ui/react'
 import { NseIndia } from "stock-nse-india";
+import ReturnsCalculator from '../dashComponents/ReturnsCalculator';
 const nseIndia = new NseIndia()
 
 
@@ -405,6 +406,7 @@ const RiskAppetite = () => {
                       <div className="col-md-auto">
                         <div className="container" style={{ background: "#2A2A2D", minHeight: "48vh", minWidth: "32vw", borderRadius: "20px", marginTop: "2.5vh" ,padding:0}} >
                           <h1>sample</h1>
+                          <ReturnsCalculator/>
                         </div>
                       </div>
                       <div className="col-md-auto">
