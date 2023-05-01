@@ -91,11 +91,12 @@ const Suggestions = () => {
       .catch((err) => console.log(err))
   }, [])
 
+
   return (
     <div className="dashboard-container">
 
       {/* alert dialog box chakra */}
-      <AlertDialog
+      {/* <AlertDialog
         motionPreset='slideInBottom'
         leastDestructiveRef={cancelRef}
         onClose={onClose}
@@ -117,7 +118,7 @@ const Suggestions = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-      {/* alert dialog box chakra */}
+      alert dialog box chakra */}
 
       <div className="container-fluid" style={{ margin: 0, padding: 0 }}>
         <div className="row">
@@ -198,14 +199,40 @@ const Suggestions = () => {
                     Object.keys(news).map((data, i) => {
                       return (
                         <>
-                          <div className="container" style={{ background: "#2A2A2D",padding:"20px",borderRadius:"20px",marginBottom:"2vh" }}>
-                            <a href="#" className='news-title' style={{ color: "white" }}>{news[data].title}</a>
+                          {/* <AlertDialog
+                            motionPreset='slideInBottom'
+                            leastDestructiveRef={cancelRef}
+                            onClose={onClose}
+                            isOpen={isOpen}
+                            isCentered
+                            style={{height:"50vh",width:"50vw"}}
+                          >
+                            <AlertDialogOverlay />
+
+                            <AlertDialogContent>
+                              <AlertDialogHeader>{news[data].title}</AlertDialogHeader>
+                              <AlertDialogCloseButton onClick={() => navigate("/login")} />
+                              <AlertDialogBody>
+                                Content:
+                                 {news[data].content} <br/>
+                                Description
+                                  {news[data].description} <br/>
+                              </AlertDialogBody>
+                              <AlertDialogFooter>
+                                <Button colorScheme='green' ml={3} onClick={onClose}>
+                                  OK
+                                </Button>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog> */}
+                          <div className="container" style={{ background: "#2A2A2D", padding: "20px", borderRadius: "20px", marginBottom: "2vh" }}>
+                            <a href={news[data].url} onClick={onOpen} className='news-title' style={{ color: "white" }}>{news[data].title}</a>
                             <div className="row">
                               <div className="col-md-6">
-                            <p style={{color:"#fdffde"}}>Source : {news[data].source.name}</p>
+                                <p style={{ color: "#fdffde" }}>Source : {news[data].source.name}</p>
                               </div>
                               <div className="col-md-6">
-                            <p style={{color:"#fdffde"}}>Author : {news[data].author}</p>
+                                <p style={{ color: "#fdffde" }}>Author : {news[data].author}</p>
                               </div>
                             </div>
                           </div>

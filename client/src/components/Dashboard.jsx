@@ -41,8 +41,6 @@ import {
   TableCaption,
   TableContainer,
 } from '@chakra-ui/react'
-import { NseIndia } from "stock-nse-india";
-const nseIndia = new NseIndia()
 
 
 const auth = getAuth();
@@ -51,12 +49,6 @@ const auth = getAuth();
 
 const Dashboard = () => {
 
-  // realtime stock data
-
-  nseIndia.getAllStockSymbols().then(symbols => {
-    console.log(symbols)
-  })
-  // realtime stock data
 
   const navigate = useNavigate();
 
@@ -81,6 +73,7 @@ const Dashboard = () => {
       if (user) {
         let tempEmail = user.email;
         setEmail(String(tempEmail));
+        console.log(tempEmail);
         // const uid = user.uid;
         // ...
 
@@ -93,8 +86,9 @@ const Dashboard = () => {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://script.google.com/macros/s/AKfycbwNDH8iTJl6LT-bEp16QMWfADiGqSWpH9ZbEpuL76IswiafUQ424BC5Jtjk5134E7K_bw/exec");
+        const response = await axios.get("https://script.google.com/macros/s/AKfycbxn00JdZaEk5mLAqrr41ZrZqs3J6y-uHpshHkWj3pAWg-0Bq6e9Au5lr5KVbuM3fJhcnQ/exec");
         setFormData(response.data.data);
+        
         await axios.get("https://nehaarane-fictional-meme-74jx6x66qjxfvqg-5000.preview.app.github.dev/risk-calculation")
           .then(async (response) => {
             console.log(`Portfolio segregated: ${response.data}`);
@@ -175,11 +169,10 @@ const Dashboard = () => {
 
 
 
-
   useEffect(() => {
     if (formData && formData.length) {
       for (let i = 1; i < formData.length; i++) {
-        if (formData[i][8] == email) {
+        if (formData[i]["Q8"] === email) {
           setMainIndex(i);
         }
       }
@@ -240,30 +233,58 @@ const Dashboard = () => {
         // }
       };
 
+      Q1
+// : 
+// "Very Unstable"
+// Q2
+// : 
+// 0
+// Q3
+// : 
+// "None"
+// Q4
+// : 
+// "Buy more of the investment"
+// Q5
+// : 
+// 1
+// Q6
+// : 
+// "Strongly Agree"
+// Q7
+// : 
+// "Savings account and fixed deposits"
+// Q8
+// : 
+// "h@gmail.com"
+// Q9
+// : 
+// 100000
+
       let financiallyDependent;
-      if (formData[mainIndex][2] == 0) {
+      if (formData[mainIndex]["Q2"] == 0) {
         financiallyDependent = 10;
-      } else if (formData[mainIndex][2] < 5 && formData[mainIndex][2] > 0) {
+      } else if (formData[mainIndex]["Q2"] < 5 && formData[mainIndex]["Q2"] > 0) {
         financiallyDependent = 20;
       } else {
         financiallyDependent = 30;
       }
 
       let investmentHorizon;
-      if (formData[mainIndex][5] <= 3) {
+      if (formData[mainIndex]["Q5"] <= 3) {
         investmentHorizon = 10;
-      } else if (formData[mainIndex][5] >= 4 && formData[mainIndex][5] <= 7) {
+      } else if (formData[mainIndex]["Q5"] >= 4 && formData[mainIndex]["Q5"] <= 7) {
         investmentHorizon = 20;
       } else {
         investmentHorizon = 30;
       }
 
       // Calculate risk score
-      const tempScore = riskValues.secureIncome[formData[mainIndex][1]]
-        + riskValues.emiAllocation[formData[mainIndex][3]]
-        + riskValues.stockInvestmentPreference[formData[mainIndex][4]]
-        + riskValues.riskAppetite[formData[mainIndex][6]]
-        + riskValues.portfolioAllocation[formData[mainIndex][7]]
+      const tempScore = riskValues.secureIncome[formData[mainIndex]["Q1"]]
+        + riskValues.emiAllocation[formData[mainIndex]["Q3"]]
+        + riskValues.stockInvestmentPreference[formData[mainIndex]["Q4"]]
+        + riskValues.riskAppetite[formData[mainIndex]["Q6"]]
+        + riskValues.portfolioAllocation[formData[mainIndex]["Q7"]]
         + financiallyDependent + investmentHorizon;
 
       let refactor = (tempScore / 210) * 100;
@@ -276,7 +297,7 @@ const Dashboard = () => {
   }, [formData])
 
 
-
+  console.log(formData);
 
 
   return (
