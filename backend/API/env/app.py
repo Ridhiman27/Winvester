@@ -34,7 +34,7 @@ def news():
 # first version
 def mpt(risk_appetite):
 
-    risk_appetite = float(risk_appetite)
+    # risk_appetite = float(risk_appetite)
 
     # Import data for each asset class
     stocks_data = pd.read_csv('stocks.csv')
@@ -69,7 +69,19 @@ def mpt(risk_appetite):
 
     # Set target return and optimization bounds
     #TODO:Set from risk appetite
-    target_return = 0.1
+
+    def get_target_return(risk_appetite):
+        risk_appetite = risk_appetite.lower()
+        if risk_appetite == "low":
+            return 0.05
+        elif risk_appetite == "moderate":
+            return 0.1
+        elif risk_appetite == "high":
+            return 0.15
+        elif risk_appetite == "very high":
+            return 0.2
+
+    target_return = get_target_return(risk_appetite)
     bounds = sco.Bounds(0, 1)
 
     # Perform mean-variance optimization to find optimal weights
@@ -133,8 +145,8 @@ def mpt(risk_appetite):
 #**: http://0.0.0.0:5000/recommendStock?riskFree=VVV&marketReturn=Feauure
 @app.route('/recommendStock',methods=['GET'])
 def recommendStock():
-   riskFree  = request.args.get('summary', None)
-   marketReturn = request.args.get('change', None)
+   riskFree  = float(request.args.get('riskFree'))
+   marketReturn = float(request.args.get('marketReturn'))
    
    df = pd.read_csv("./stocks.csv")
    selected = df.iloc[:3000, :]
@@ -156,8 +168,35 @@ def recommendStock():
 
    return jsonify(weight_dict,metric_dict)
 
+
+#**: http://0.0.0.0:5000/recommendMF?riskFree=VVV&marketReturn=Feauure
+@app.route('/recommendMF',methods=['GET'])
+def recommendStock():
+   riskFree  = float(request.args.get('riskFree'))
+   marketReturn = float(request.args.get('marketReturn'))
+   
+   df = pd.read_csv("./mutualfunds.csv")
+   selected = df.iloc[:1400, :]
+
+   ret_generator = ReturnGenerator(selected)
+   mu_return = ret_generator.calc_mean_return(method='geometric')
+   daily_return = ret_generator.calc_return(method='daily')
+
+   mom_generator = MomentGenerator(daily_return)
+   benchmark = df.iloc[:1400].pct_change().dropna(how='any').sum(axis=1)/df.shape[1]
+   cov_matrix = mom_generator.calc_cov_mat()
+   beta_vec = mom_generator.calc_beta(benchmark)
+   PortOpt = Optimizer(mu_return, cov_matrix, beta_vec)
+   PortOpt.add_objective("min_volatility")
+   PortOpt.add_constraint("weight", weight_bound=(-1,1), leverage=1) # Portfolio Long/Short
+   PortOpt.add_constraint("concentration", top_holdings=2, top_concentration=0.5)
+   PortOpt.solve()
+   weight_dict, metric_dict = PortOpt.summary(risk_free=riskFree, market_return=marketReturn, top_holdings=1)
+
+   return jsonify(weight_dict,metric_dict)
+
 #**: http://0.0.0.0:5000/predictmf/name
-@app.route('/predictstock')
+@app.route('/predictstock/<name>',methods=['GET'])
 def predictstock(name):
 
     model = pickle.load(open("../Model/Stocks/"+name, 'rb'))
