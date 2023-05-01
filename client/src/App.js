@@ -8,6 +8,7 @@ import RiskAppetite from "./components/pages/RiskAppetite.jsx";
 import Suggestions from "./components/pages/Suggestions.jsx";
 import Home from "./components/Home.jsx";
 import Signup from './components/Signup';
+import Logout from './components/Logout';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard/>} />
             <Route path="/risk-appetite" element={<RiskAppetite/>} />
             <Route path="/suggestions" element={<Suggestions/>} />
+            <Route path="/logout" element={<Logout/>} />
           </Routes>
       </Router>
     </>

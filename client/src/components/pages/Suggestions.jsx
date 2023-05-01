@@ -185,6 +185,17 @@ const Suggestions = () => {
                         <a href="/suggestions" style={{ color: "white", fontSize: "22px" }}>Suggestions</a>
                       </div>
                     </div>
+                    <div className="row" style={{ marginTop: "3vh", paddingTop: "10px", paddingBottom: "10px" }}>
+                      <div className="col-md-auto">
+                        <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M10.3534 7.20898H6.84127C3.61522 7.20898 1 9.82421 1 13.0503V26.1588C1 29.3848 3.61523 32.0001 6.84127 32.0001H26.1587C29.3848 32.0001 32 29.3848 32 26.1588V13.0503C32 9.82421 29.3848 7.20898 26.1587 7.20898H23.4483" stroke="white" stroke-width="1.94709" stroke-linecap="round" />
+                          <path d="M17.0743 1.69983V16.3908M17.0743 1.69983L13.6299 4.68394M17.0743 1.69983L20.5188 4.68394" stroke="white" stroke-width="1.94709" stroke-linecap="round" />
+                        </svg>
+                      </div>
+                      <div className="col-md-auto">
+                        <a href="/logout" style={{ color: "white", fontSize: "22px" }}>Logout</a>
+                      </div>
+                    </div>
                   </div>
                 </li>
               </ol>
