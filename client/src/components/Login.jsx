@@ -45,6 +45,7 @@ function Login() {
                     </div>
                     <div className="col-lg-2 loginTextArea">
                         <div className="inputGroup">
+                        <h4 style={{position:"relative",top:"-3vh",fontWeight:"bold"}}>Login</h4>
                         <input className="loginInput form-control" type="email" name="Email" id="" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}  />
                         <input className="passwordInput form-control" type="password" name="Password" id="" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}  />
                         <a href="" className="recoverPasswordText">Forgot Password</a>

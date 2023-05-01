@@ -26,7 +26,7 @@ function ReturnsCalculator({ data }) {
     const calculateReturns = () => {
         const totalInvestment = initialInvestment * Math.pow((1 + (returns / 100)), investmentRange);
         const compoundInterestReturns = totalInvestment - initialInvestment;
-        data(compoundInterestReturns,totalInvestment);
+        data(Math.ceil(compoundInterestReturns),Math.ceil(totalInvestment),returns);
       };
       
 

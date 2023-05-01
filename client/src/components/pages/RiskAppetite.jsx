@@ -40,6 +40,10 @@ import {
 import { NseIndia } from "stock-nse-india";
 import ReturnsCalculator from '../dashComponents/ReturnsCalculator';
 import ReturnsPie from '../dashComponents/ReturnsPie';
+
+
+
+
 const nseIndia = new NseIndia()
 
 
@@ -49,7 +53,8 @@ const RiskAppetite = () => {
 
   const navigate = useNavigate();
 
-  const [returnsValue,setReturnsValue ] = useState(0);
+  const [returnsValue, setReturnsValue] = useState(0);
+  const [totalValue, setTotalValue] = useState(0);
 
   const [formData, setFormData] = useState(undefined);
   const [email, setEmail] = useState("");
@@ -59,6 +64,7 @@ const RiskAppetite = () => {
   const [pieData, setPieData] = useState({});
   const [pieDataLoading, setPieDataLoading] = useState(true);
   const [pieChartData, setPieChartData] = useState([]);
+  const [temp,setTemp] = useState(0);
   // alert
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = React.useRef()
@@ -66,10 +72,12 @@ const RiskAppetite = () => {
 
   // const myData = [{angle: 33}, {angle: 33}, {angle: 33}]
 
-  const calculateReturns = (data,value) => {
-    setReturnsValue(data)
-    console.log(`data received from calculator: ${data}`)
-    console.log(`data received from calculator: ${value}`)
+  const calculateReturns = (data, value,r) => {
+    setReturnsValue(data);
+    setTotalValue(value);
+    setTemp(r);
+    console.log(`Estimated Returns: ${data}`);
+    console.log(`Total Value: ${value}`);
   }
 
 
@@ -80,6 +88,7 @@ const RiskAppetite = () => {
       if (user) {
         let tempEmail = user.email;
         setEmail(String(tempEmail));
+        console.log(tempEmail);
         // const uid = user.uid;
         // ...
 
@@ -92,85 +101,17 @@ const RiskAppetite = () => {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://script.google.com/macros/s/AKfycbwNDH8iTJl6LT-bEp16QMWfADiGqSWpH9ZbEpuL76IswiafUQ424BC5Jtjk5134E7K_bw/exec");
+        const response = await axios.get("https://script.google.com/macros/s/AKfycbxn00JdZaEk5mLAqrr41ZrZqs3J6y-uHpshHkWj3pAWg-0Bq6e9Au5lr5KVbuM3fJhcnQ/exec");
         setFormData(response.data.data);
-        await axios.get("https://vedxpatel-improved-robot-x4j9pjxv6xwh5x9-5000.preview.app.github.dev/risk-calculation")
-          .then(async (response) => {
-            console.log(`Portfolio segregated: ${response.data}`);
-            // setPieData(response.data);
-            setPieDataLoading(false);
-            // let pieResponse = await axios.get("https://vedxpatel-improved-robot-x4j9pjxv6xwh5x9-5000.preview.app.github.dev/pie")
-            // console.log(`Pie Chart Data: ${pieResponse.data}`)
-
-            // PIE CHART DATA 
-            let temp = response.data
-            let tempPieData = {}
-            for (let i = 0; i < temp.length; i++) {
-              let inputString = temp[i]
-              const parseString = (str) => {
-                const pairs = str.split(",");
-                const result = {};
-
-                for (let i = 0; i < pairs.length; i++) {
-                  const [key, value] = pairs[i].split(":");
-                  result[key.trim()] = parseFloat(value) || 0;
-                }
-                Object.assign(tempPieData, result)
-                return result;
-              }
-
-              const dataObj = parseString(inputString);
-              // console.log(dataObj);
-            }
-            console.log(tempPieData)
-
-            if (tempPieData["Mutual Funds"] < 15) { tempPieData["Mutual Funds"] = 15; tempPieData["Stock"] -= 15; }
-            setPieData(tempPieData)
-            setPieChartData([
-              {
-                "id": "stock",
-                "label": "stocks",
-                "value": tempPieData["Stock"],
-                "color": "hsl(66, 70%, 50%)"
-              },
-              {
-                "id": "mutual funds",
-                "label": "mutual funds",
-                "value": tempPieData["Mutual Funds"],
-                "color": "hsl(79, 70%, 50%)"
-              },
-              {
-                "id": "gold",
-                "label": "gold",
-                "value": tempPieData["GOLD"],
-                "color": "hsl(264, 70%, 50%)"
-              },
-              {
-                "id": "etf",
-                "label": "etf",
-                "value": 0,
-                "color": "hsl(265, 70%, 50%)"
-              },
-              {
-                "id": "government schemes",
-                "label": "government schemes",
-                "value": 0,
-                "color": "hsl(270, 70%, 50%)"
-              }])
-            // PIE CHART DATA 
-
-
-          })
-          .catch((error) => console.error(error))
-
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
 
-  }, [])
 
+
+  }, [])
 
 
 
@@ -178,7 +119,7 @@ const RiskAppetite = () => {
   useEffect(() => {
     if (formData && formData.length) {
       for (let i = 1; i < formData.length; i++) {
-        if (formData[i][8] == email) {
+        if (formData[i]["Q8"] == email) {
           setMainIndex(i);
         }
       }
@@ -240,29 +181,29 @@ const RiskAppetite = () => {
       };
 
       let financiallyDependent;
-      if (formData[mainIndex][2] == 0) {
+      if (formData[mainIndex]["Q2"] == 0) {
         financiallyDependent = 10;
-      } else if (formData[mainIndex][2] < 5 && formData[mainIndex][2] > 0) {
+      } else if (formData[mainIndex]["Q2"] < 5 && formData[mainIndex]["Q2"] > 0) {
         financiallyDependent = 20;
       } else {
         financiallyDependent = 30;
       }
 
       let investmentHorizon;
-      if (formData[mainIndex][5] <= 3) {
+      if (formData[mainIndex]["Q5"] <= 3) {
         investmentHorizon = 10;
-      } else if (formData[mainIndex][5] >= 4 && formData[mainIndex][5] <= 7) {
+      } else if (formData[mainIndex]["Q5"] >= 4 && formData[mainIndex]["Q5"] <= 7) {
         investmentHorizon = 20;
       } else {
         investmentHorizon = 30;
       }
 
       // Calculate risk score
-      const tempScore = riskValues.secureIncome[formData[mainIndex][1]]
-        + riskValues.emiAllocation[formData[mainIndex][3]]
-        + riskValues.stockInvestmentPreference[formData[mainIndex][4]]
-        + riskValues.riskAppetite[formData[mainIndex][6]]
-        + riskValues.portfolioAllocation[formData[mainIndex][7]]
+      const tempScore = riskValues.secureIncome[formData[mainIndex]["Q1"]]
+        + riskValues.emiAllocation[formData[mainIndex]["Q3"]]
+        + riskValues.stockInvestmentPreference[formData[mainIndex]["Q4"]]
+        + riskValues.riskAppetite[formData[mainIndex]["Q6"]]
+        + riskValues.portfolioAllocation[formData[mainIndex]["Q7"]]
         + financiallyDependent + investmentHorizon;
 
       let refactor = (tempScore / 210) * 100;
@@ -271,8 +212,15 @@ const RiskAppetite = () => {
       // // Return risk score
       console.log(riskScore);
       setRiskScoreLoading(true);
+
     }
   }, [formData])
+
+
+
+
+
+  console.log(formData);
 
 
 
@@ -359,16 +307,16 @@ const RiskAppetite = () => {
                         <a href="/form" style={{ color: "white", fontSize: "22px" }}>Questionnaire</a>
                       </div>
                     </div>
-                    <div className="row" style={{marginTop:"3vh",paddingTop:"10px",paddingBottom:"10px"}}>
+                    <div className="row" style={{ marginTop: "3vh", paddingTop: "10px", paddingBottom: "10px" }}>
                       <div className="col-md-auto">
-                      <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M24.0322 13.4207C24.0322 18.8393 19.4944 23.2786 13.8382 23.2786C8.18202 23.2786 3.64422 18.8393 3.64422 13.4207C3.64422 8.00213 8.18202 3.5628 13.8382 3.5628C19.4944 3.5628 24.0322 8.00213 24.0322 13.4207Z" fill="white" stroke="white" stroke-width="1.79235"/>
-<path d="M22.4668 23.6969L28.6237 30.1493" stroke="white" stroke-width="1.79235" stroke-linecap="round"/>
-</svg>
+                        <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M24.0322 13.4207C24.0322 18.8393 19.4944 23.2786 13.8382 23.2786C8.18202 23.2786 3.64422 18.8393 3.64422 13.4207C3.64422 8.00213 8.18202 3.5628 13.8382 3.5628C19.4944 3.5628 24.0322 8.00213 24.0322 13.4207Z" fill="white" stroke="white" stroke-width="1.79235" />
+                          <path d="M22.4668 23.6969L28.6237 30.1493" stroke="white" stroke-width="1.79235" stroke-linecap="round" />
+                        </svg>
 
                       </div>
                       <div className="col-md-auto">
-                        <a href="/suggestions" style={{color:"white",fontSize:"22px"}}>Suggestions</a>
+                        <a href="/suggestions" style={{ color: "white", fontSize: "22px" }}>Suggestions</a>
                       </div>
                     </div>
                   </div>
@@ -386,7 +334,7 @@ const RiskAppetite = () => {
                       <div className="col-md-auto" style={{ width: "100%" }}>
                         <div className="container" style={{ height: "20vh", alignItems: "center" }}>
                           {
-                            riskScoreLoading === false ? (
+                            riskScore < 0 ? (
                               <div className="" style={{ position: "relative", top: "13vh", left: "33vw" }}>
                                 <Spinner size='xl' color='blue' />
                               </div>
@@ -424,17 +372,38 @@ const RiskAppetite = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="container" style={{width:"80vw",margin:0,padding:0}}>
+                  <div className="container" style={{ width: "80vw", margin: 0, padding: 0 }}>
                     <div className="row">
                       <div className="col-md-auto">
-                        <div className="container" style={{ background: "#2A2A2D", minHeight: "48vh", minWidth: "32vw", borderRadius: "20px", marginTop: "2.5vh" ,padding:0}} >
-                        <h4 style={{ color: "white", position: "relative", top: "1.5vh", left: "1.5vw",fontWeight:"bold",marginBottom:"2vh" }}>Returns Calculator</h4>
-                          <ReturnsCalculator data={calculateReturns}/>
+                        <div className="container" style={{ background: "#2A2A2D", minHeight: "48vh", minWidth: "32vw", borderRadius: "20px", marginTop: "2.5vh", padding: 0 }} >
+                          <h4 style={{ color: "white", position: "relative", top: "1.5vh", left: "1.5vw", fontWeight: "bold", marginBottom: "2vh" }}>Returns Calculator</h4>
+                          <ReturnsCalculator data={calculateReturns} />
                         </div>
                       </div>
                       <div className="col-md-auto">
-                        <div className="container" style={{ background: "#2A2A2D", minHeight: "48vh", minWidth: "32vw", borderRadius: "20px", marginTop: "2.5vh" ,padding:0}} >
-                          <ReturnsPie />
+                        <div className="container" style={{ background: "#2A2A2D", minHeight: "48vh", minWidth: "32vw", borderRadius: "20px", marginTop: "2.5vh", padding: 0 }} >
+                          <ReturnsPie first={temp} />
+                          <div className="container" style={{color:"white"}}>
+                          <StatGroup>
+                            <Stat>
+                              <StatLabel style={{fontSize:"18px"}}>Total Value</StatLabel>
+                              <StatNumber>{totalValue}</StatNumber>
+                              {/* <StatHelpText>
+                                <StatArrow type='increase' />
+                                23.36%
+                              </StatHelpText> */}
+                            </Stat>
+
+                            <Stat>
+                              <StatLabel style={{fontSize:"18px"}}>Estimated Returns</StatLabel>
+                              <StatNumber>{returnsValue}</StatNumber>
+                              <StatHelpText>
+                                <StatArrow type='increase' />
+                                {temp} %
+                              </StatHelpText>
+                            </Stat>
+                          </StatGroup>
+                              </div>
                         </div>
                       </div>
                     </div>
