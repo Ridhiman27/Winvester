@@ -316,7 +316,7 @@ const RiskAppetite = () => {
 
                       </div>
                       <div className="col-md-auto">
-                        <a href="/suggestions" style={{ color: "white", fontSize: "22px" }}>Suggestions</a>
+                        <a href="/suggestions" style={{ color: "white", fontSize: "22px" }}>Information</a>
                       </div>
                     </div>
                     <div className="row" style={{ marginTop: "3vh", paddingTop: "10px", paddingBottom: "10px" }}>

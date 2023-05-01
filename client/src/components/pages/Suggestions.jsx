@@ -182,7 +182,7 @@ const Suggestions = () => {
 
                       </div>
                       <div className="col-md-auto">
-                        <a href="/suggestions" style={{ color: "white", fontSize: "22px" }}>Suggestions</a>
+                        <a href="/suggestions" style={{ color: "white", fontSize: "22px" }}>Information</a>
                       </div>
                     </div>
                     <div className="row" style={{ marginTop: "3vh", paddingTop: "10px", paddingBottom: "10px" }}>
@@ -202,10 +202,10 @@ const Suggestions = () => {
             </div>
           </div>
           <div className="col-md-auto" style={{ width: "54vw" }}>
-            <h2 style={{ color: "white", marginBottom: "5vh", color: "white", position: "relative", top: "1.5vh", fontWeight: "bold", marginTop: "2vh" }}>Suggestions</h2>
+            <h2 style={{ color: "white", marginBottom: "5vh", color: "white", position: "relative", top: "1.5vh", fontWeight: "bold", marginTop: "2vh",left:"10vw" }}>News</h2>
             <div className="container">
               <div className="row">
-                <div className="col-md-auto" style={{ overflowY: "scroll", height: "85vh", }}>
+                <div className="col-md-auto newsContainer" style={{ overflowY: "scroll", height: "85vh", }}>
                   {
                     Object.keys(news).map((data, i) => {
                       return (
