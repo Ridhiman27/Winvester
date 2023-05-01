@@ -134,7 +134,7 @@ def returnPrediction():
     return jsonify(float(output))
 
 @app.route('/predictstock')
-def returnPrediction():
+def returnPrediction2():
 
     c1 = ['ASIANPAINT.csv', 'BAJAJ-AUTO.csv', 'BAJAJFINSV.csv', 'BAJFINANCE.csv', 
     'BRITANNIA.csv', 'DRREDDY.csv', 'GRASIM.csv', 'HEROMOTOCO.csv', 'INFY.csv', 'LT.csv', 
@@ -157,7 +157,7 @@ def returnPrediction():
     return jsonify(float(output))
 
 @app.route('/predictmf')
-def returnPrediction():
+def returnPrediction3():
     prediction = model.predict(n_periods=100)
     print(prediction)
     output = round(prediction.iloc[0], 2)
