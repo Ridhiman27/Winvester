@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Chart from "react-apexcharts";
 
 class RadialBar extends Component {
+
+  
+
   constructor(props) {
     super(props);
 
@@ -105,11 +108,12 @@ class RadialBar extends Component {
   }
 
   render() {
+    
     return (
       <div className="donut">
         <Chart
           options={this.state.options}
-          series={this.state.series}
+          series={[100,this.props.first]}
           type="radialBar"
           width="500"
         />
