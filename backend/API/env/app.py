@@ -7,7 +7,7 @@ import scipy.optimize as sco
 import flask_cors
 import json
 from pymarkowitz import *
-
+from newsapi import NewsApiClient
 
 app = Flask(__name__)
 flask_cors.CORS(app)
@@ -19,8 +19,17 @@ model = pickle.load(open('ADANIPORTS', 'rb'))
 data = pd.read_csv("ADANIPORTS.csv")
 values = data[['Open', 'High', 'Low', 'Close']].values
 
+newsapi = NewsApiClient(api_key='212ddd1515a94319b104eb15647b72db')
 
-#**: http://0.0.0.0:5000/risk-calculation/risk_appetite
+top_headlines = newsapi.get_top_headlines(category='business',country='in')
+
+#** http://0.0.0.0:5000/news
+@app.route('/news')
+def news():
+    return top_headlines
+
+
+#**  : http://0.0.0.0:5000/risk-calculation/risk_appetite
 @app.route('/risk-calculation/<risk_appetite>')
 # first version
 def mpt(risk_appetite):
@@ -147,20 +156,18 @@ def recommendStock():
 
    return jsonify(weight_dict,metric_dict)
 
-#**: http://0.0.0.0:5000/predictstock/name
-@app.route('/predictstock/<name>',methods=['GET'])
+#**: http://0.0.0.0:5000/predictmf/name
+@app.route('/predictstock')
 def predictstock(name):
 
     model = pickle.load(open("../Model/Stocks/"+name, 'rb'))
 
     #prediction for 1000 days
     prediction = model.predict(n_periods=1000)
-    # print(prediction)
 
     pred_lst = prediction.tolist()
 
     json_data = json.dumps(pred_lst)
-    # output = round(prediction.iloc[0], 2)
 
     return jsonify(json_data)
 
@@ -168,16 +175,14 @@ def predictstock(name):
 @app.route('/predictmf/<name>',methods=['GET'])
 def predictmf(name):
 
+    #TODO:Adjust the name according to the name of the csv
     model = pickle.load(open("../Model/MF/"+name, 'rb'))
 
-    #prediction for 1000 days
-    prediction = model.predict(n_periods=1000)
-    # print(prediction)
+    prediction = model.predict(n_periods=100)
 
     pred_lst = prediction.tolist()
 
     json_data = json.dumps(pred_lst)
-    # output = round(prediction.iloc[0], 2)
 
     return jsonify(json_data)
 
