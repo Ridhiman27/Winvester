@@ -12,6 +12,7 @@ import {
     FormLabel,
     FormErrorMessage,
     FormHelperText,
+    Button
 } from '@chakra-ui/react'
 
 function ReturnsCalculator() {
@@ -48,22 +49,22 @@ function ReturnsCalculator() {
     };
 
 
-    const [sliderValue1, setSliderValue1] = useState(10000);
+    const [sliderValue1, setSliderValue1] = useState(100000);
     const [sliderValue2,setSliderValue2] = useState(5);
     const [sliderValue3,setSliderValue3] = useState(10);
 
     return (
         <div>
-            <div className="container">
+            <div className="container" style={{position: "relative", top: "1.5vh", left: "1vw"}}>
                 <div className="row" style={{width:"100%"}}>
                     <div className="col-md-auto" style={{ color: "white",width:"100%" }}>
                         <FormControl style={{width:"25vw"}}>
-                            <FormLabel htmlFor="initialInvestment">Initial Investment:</FormLabel>
-                            <Slider aria-label='slider-ex-1' defaultValue={10000} min={1000} max={1000000} onChange={(val) => setSliderValue1(val)}>
+                            <FormLabel style={{marginBottom:"5vh",fontSize:"18px"}} htmlFor="initialInvestment">Initial Investment:</FormLabel>
+                            <Slider aria-label='slider-ex-1' colorScheme="yellow" defaultValue={100000} min={1000} max={1000000} onChange={(val) => setSliderValue1(val)} style={{marginBottom:"3vh"}}>
                                 <SliderMark
                                     value={sliderValue1}
                                     textAlign='center'
-                                    bg='blue.800'
+                                    bg='yellow.800'
                                     color='white'
                                     mt='-10'
                                     ml='-35'
@@ -77,12 +78,12 @@ function ReturnsCalculator() {
                                 <SliderThumb />
                             </Slider>
 
-                            <FormLabel htmlFor="investmentRange">Investment Range:</FormLabel>
-                            <Slider aria-label='slider-ex-1' defaultValue={5} min={0} max={30} onChange={(val) => setSliderValue2(val)}>
+                            <FormLabel style={{marginBottom:"5vh",fontSize:"18px"}} htmlFor="investmentRange">Investment Range:</FormLabel>
+                            <Slider aria-label='slider-ex-1' colorScheme="yellow" defaultValue={5} min={0} max={30} onChange={(val) => setSliderValue2(val)} style={{marginBottom:"3vh"}}>
                                 <SliderMark
                                     value={sliderValue2}
                                     textAlign='center'
-                                    bg='blue.800'
+                                    bg='yellow.800'
                                     color='white'
                                     mt='-10'
                                     ml='-35'
@@ -98,12 +99,12 @@ function ReturnsCalculator() {
                             {/* <input type="number" id="investmentRange" value={investmentRange[0]} onChange={handleInvestmentRangeChange} /> */}
                             {/* <input type="number" id="investmentRange" value={investmentRange[1]} onChange={handleInvestmentRangeChange} /> */}
 
-                            <FormLabel htmlFor="stockReturns">Stock Returns (%):</FormLabel>
-                            <Slider aria-label='slider-ex-1' defaultValue={10} min={1} max={50} onChange={(val) => setSliderValue3(val)}>
+                            <FormLabel style={{marginBottom:"5vh",fontSize:"18px"}} htmlFor="stockReturns">Stock or MF Returns (%):</FormLabel>
+                            <Slider aria-label='slider-ex-1' colorScheme="yellow" defaultValue={10} min={1} max={50} onChange={(val) => setSliderValue3(val)} style={{marginBottom:"7vh"}}>
                                 <SliderMark
                                     value={sliderValue3}
                                     textAlign='center'
-                                    bg='blue.800'
+                                    bg='yellow.800'
                                     color='white'
                                     mt='-10'
                                     ml='-35'
@@ -116,13 +117,7 @@ function ReturnsCalculator() {
                                 </SliderTrack>
                                 <SliderThumb />
                             </Slider>
-                            {/* <input type="number" id="stockReturns" value={stockReturns} onChange={handleStockReturnsChange} /> */}
-
-                            <FormLabel htmlFor="mutualFundReturns">Mutual Fund Returns (%):</FormLabel>
-                            {/* <input type="number" id="mutualFundReturns" value={mutualFundReturns} onChange={handleMutualFundReturnsChange} /> */}
-
-                            <button onClick={calculateReturns}>Calculate Returns</button>
-                        </FormControl>
+                            <Button colorScheme='yellow' style={{marginTop:"3vh",alignSelf:"center",backgroundColor:"#FCED2F",color:"black"}} onClick={calculateReturns}>Calculate</Button>                        </FormControl>
                     </div>
                 </div>
             </div>

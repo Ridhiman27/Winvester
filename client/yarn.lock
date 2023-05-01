@@ -2931,6 +2931,15 @@
     "@react-spring/web" "9.4.5 || ^9.7.2"
     d3-shape "^1.3.5"
 
+"@nivo/arcs@0.82.0":
+  version "0.82.0"
+  resolved "https://registry.yarnpkg.com/@nivo/arcs/-/arcs-0.82.0.tgz#4c27536db7895ce76ba53ae397744152ceeed580"
+  integrity sha512-4y25F/M8U3y6317Gj4GX4spAqDPKri2f07CE1XmpwmUKoffcg+QeSsiCw67Is+R0bW8yhpvKj/CZjC5xm8or4g==
+  dependencies:
+    "@nivo/colors" "0.82.0"
+    "@react-spring/web" "9.4.5 || ^9.7.2"
+    d3-shape "^1.3.5"
+
 "@nivo/axes@0.81.0":
   version "0.81.0"
   resolved "https://registry.npmjs.org/@nivo/axes/-/axes-0.81.0.tgz"
@@ -2967,12 +2976,27 @@
     d3-scale-chromatic "^2.0.0"
     lodash "^4.17.21"
 
-"@nivo/core@^0.81.0":
-  version "0.81.0"
-  resolved "https://registry.npmjs.org/@nivo/core/-/core-0.81.0.tgz"
-  integrity sha512-hddRtShpGc82B9Vx6JXczXSlMsgY45LxwResLS5Mx8mWlVSbRgOP8ruVNJ8USGtofecL/gwB985fadHR9asAbg==
+"@nivo/colors@0.82.0":
+  version "0.82.0"
+  resolved "https://registry.yarnpkg.com/@nivo/colors/-/colors-0.82.0.tgz#9b1a7076a66fea267de2170be7c0a17c65d4f6f1"
+  integrity sha512-7Bvs+i1VmXXUVl4NC7Q648S+veIHwaiNwRKg8JfRj60RVxkQ5zYG9iW3NTI6WsIFA+3MPtedIKql/XS1+3NJ4g==
   dependencies:
-    "@nivo/recompose" "0.81.0"
+    "@types/d3-color" "^2.0.0"
+    "@types/d3-scale" "^3.2.3"
+    "@types/d3-scale-chromatic" "^2.0.0"
+    "@types/prop-types" "^15.7.2"
+    d3-color "^3.1.0"
+    d3-scale "^3.2.3"
+    d3-scale-chromatic "^2.0.0"
+    lodash "^4.17.21"
+    prop-types "^15.7.2"
+
+"@nivo/core@^0.82.0":
+  version "0.82.0"
+  resolved "https://registry.yarnpkg.com/@nivo/core/-/core-0.82.0.tgz#86d86c5e5b31fe4ecaf36d451cc042b4450a5508"
+  integrity sha512-OIn3VldQFRWU1W7xlSZz4S6MWjY2mG10xxZc7MWax8KvQACqJvB4Bpd7Y8369qcYSl9RWfFBlfQzoVIFPcg2Zg==
+  dependencies:
+    "@nivo/recompose" "0.82.0"
     "@react-spring/web" "9.4.5 || ^9.7.2"
     d3-color "^3.1.0"
     d3-format "^1.4.4"
@@ -2988,6 +3012,17 @@
   resolved "https://registry.npmjs.org/@nivo/legends/-/legends-0.81.0.tgz"
   integrity sha512-cmyeiPrB7PzSN0ThiyMZS+a3Az41tr6kiKsh/vp398nR7Fk3wl1tE8t4/X2ONd6tLmpFLMXCXhDVIgYTMzkWPQ==
 
+"@nivo/legends@0.82.0":
+  version "0.82.0"
+  resolved "https://registry.yarnpkg.com/@nivo/legends/-/legends-0.82.0.tgz#909faa6cd25337ef84e9a425eba8ba6f4ca93d91"
+  integrity sha512-V/p2fUZufgwzJjK/YUVWhSeoqr0wnV/b82HwjZiaH7R/B7rr6j0tI5z0CVcuGmT+fqf4sl5Mwg7H3DE9ZYLI1A==
+  dependencies:
+    "@nivo/colors" "0.82.0"
+    "@types/d3-scale" "^3.2.3"
+    "@types/prop-types" "^15.7.2"
+    d3-scale "^3.2.3"
+    prop-types "^15.7.2"
+
 "@nivo/pie@^0.81.0":
   version "0.81.0"
   resolved "https://registry.npmjs.org/@nivo/pie/-/pie-0.81.0.tgz"
@@ -2999,11 +3034,40 @@
     "@nivo/tooltip" "0.81.0"
     d3-shape "^1.3.5"
 
-"@nivo/recompose@0.81.0":
-  version "0.81.0"
-  resolved "https://registry.npmjs.org/@nivo/recompose/-/recompose-0.81.0.tgz"
-  integrity sha512-YbD2Aete3O8DFcNXD5OEhCb4ZyBBIc/OQkux3p7ughs84j7Bl5hVl1ySU6h0DGktmeB7/RazG/j33GzBREN1zg==
+"@nivo/polar-axes@0.82.0":
+  version "0.82.0"
+  resolved "https://registry.yarnpkg.com/@nivo/polar-axes/-/polar-axes-0.82.0.tgz#fbb5d4eca1e10daf77563fcf98b01eeeb96374e7"
+  integrity sha512-j63DtX8PzyjTQJ/GefMuVTjFt+BShZQzpWX2OENWw298Lhwp3mQ1T/L30Y4xcgPN7WYa//KGhn5IVyJpn9aPgQ==
   dependencies:
+    "@nivo/arcs" "0.82.0"
+    "@nivo/scales" "0.82.0"
+    "@react-spring/web" "9.4.5 || ^9.7.2"
+
+"@nivo/radial-bar@^0.82.0":
+  version "0.82.0"
+  resolved "https://registry.yarnpkg.com/@nivo/radial-bar/-/radial-bar-0.82.0.tgz#54c5b1b12e85203dd6d3a66bc9d4df081b37541c"
+  integrity sha512-7HK6/zUXBbrpJd7Tj/zhF/VycO4zCxXxsaXZlnw2ENywLbxW7JyH6qtqpH/7x97sFdorn4sk2s1JC0DJwA3C/w==
+  dependencies:
+    "@nivo/arcs" "0.82.0"
+    "@nivo/colors" "0.82.0"
+    "@nivo/legends" "0.82.0"
+    "@nivo/polar-axes" "0.82.0"
+    "@nivo/scales" "0.82.0"
+    "@nivo/tooltip" "0.82.0"
+    "@react-spring/web" "9.4.5 || ^9.7.2"
+    "@types/d3-scale" "^3.2.3"
+    "@types/d3-shape" "^2.0.0"
+    d3-scale "^3.2.3"
+    d3-shape "^1.3.5"
+
+"@nivo/recompose@0.82.0":
+  version "0.82.0"
+  resolved "https://registry.yarnpkg.com/@nivo/recompose/-/recompose-0.82.0.tgz#aa534247a2e360a21237d25f716d908a92f182c0"
+  integrity sha512-TQh9YAz+DUEFi9e8PGyP3fO6wbG+gqpyBBhXLMYqqhcKmHOlHXJxgGxHlEje6gHPTxyYGeyjW878N/v8aeUGCQ==
+  dependencies:
+    "@types/prop-types" "^15.7.2"
+    "@types/react-lifecycles-compat" "^3.0.1"
+    prop-types "^15.7.2"
     react-lifecycles-compat "^3.0.4"
 
 "@nivo/scales@0.81.0":
@@ -3016,10 +3080,30 @@
     d3-time-format "^3.0.0"
     lodash "^4.17.21"
 
+"@nivo/scales@0.82.0":
+  version "0.82.0"
+  resolved "https://registry.yarnpkg.com/@nivo/scales/-/scales-0.82.0.tgz#738505f5286db92a973a8277bc3c3cee985dd5de"
+  integrity sha512-6h1gFZsVg8Tsk94T1W8/ilQm9l9k4Gmhe5lJYln281jcbAdMwoXNWhouybR/vdE5+xoB1RTgmqbomAxBP0lcyA==
+  dependencies:
+    "@types/d3-scale" "^3.2.3"
+    "@types/d3-time" "^1.1.1"
+    "@types/d3-time-format" "^3.0.0"
+    d3-scale "^3.2.3"
+    d3-time "^1.0.11"
+    d3-time-format "^3.0.0"
+    lodash "^4.17.21"
+
 "@nivo/tooltip@0.81.0":
   version "0.81.0"
   resolved "https://registry.npmjs.org/@nivo/tooltip/-/tooltip-0.81.0.tgz"
   integrity sha512-ExhYn10Exbetr//SUXQhrOOMShdEbFNBagaZKZYgZrdiwSN5uuI2YGmmlOEcj5QABpk8J1nJ0CED+vxq1tievQ==
+  dependencies:
+    "@react-spring/web" "9.4.5 || ^9.7.2"
+
+"@nivo/tooltip@0.82.0":
+  version "0.82.0"
+  resolved "https://registry.yarnpkg.com/@nivo/tooltip/-/tooltip-0.82.0.tgz#5ab71fc928f386397dac79b9f269a308966584bc"
+  integrity sha512-P+hbSnjk4DYFtRRh0wW+V3BQEtiDsDCk+P2PgoyqEnfhJS95Kq2BbNAHAM7hbKWJ9LYlP1jkAGzasK3qofY9Mg==
   dependencies:
     "@react-spring/web" "9.4.5 || ^9.7.2"
 
@@ -3544,6 +3628,50 @@
   dependencies:
     "@types/node" "*"
 
+"@types/d3-color@^2.0.0":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@types/d3-color/-/d3-color-2.0.3.tgz#8bc4589073c80e33d126345542f588056511fe82"
+  integrity sha512-+0EtEjBfKEDtH9Rk3u3kLOUXM5F+iZK+WvASPb0MhIZl8J8NUvGeZRwKCXl+P3HkYx5TdU4YtcibpqHkSR9n7w==
+
+"@types/d3-path@^2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@types/d3-path/-/d3-path-2.0.2.tgz#6052f38f6186319769dfabab61b5514b0e02c75c"
+  integrity sha512-3YHpvDw9LzONaJzejXLOwZ3LqwwkoXb9LI2YN7Hbd6pkGo5nIlJ09ul4bQhBN4hQZJKmUpX8HkVqbzgUKY48cg==
+
+"@types/d3-scale-chromatic@^2.0.0":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@types/d3-scale-chromatic/-/d3-scale-chromatic-2.0.1.tgz#495cbbae7273e0d0ff564cdc19aa6d2b9928da83"
+  integrity sha512-3EuZlbPu+pvclZcb1DhlymTWT2W+lYsRKBjvkH2ojDbCWDYavifqu1vYX9WGzlPgCgcS4Alhk1+zapXbGEGylQ==
+
+"@types/d3-scale@^3.2.3":
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/@types/d3-scale/-/d3-scale-3.3.2.tgz#18c94e90f4f1c6b1ee14a70f14bfca2bd1c61d06"
+  integrity sha512-gGqr7x1ost9px3FvIfUMi5XA/F/yAf4UkUDtdQhpH92XCT0Oa7zkkRzY61gPVJq+DxpHn/btouw5ohWkbBsCzQ==
+  dependencies:
+    "@types/d3-time" "^2"
+
+"@types/d3-shape@^2.0.0":
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/@types/d3-shape/-/d3-shape-2.1.3.tgz#35d397b9e687abaa0de82343b250b9897b8cacf3"
+  integrity sha512-HAhCel3wP93kh4/rq+7atLdybcESZ5bRHDEZUojClyZWsRuEMo3A52NGYJSh48SxfxEU6RZIVbZL2YFZ2OAlzQ==
+  dependencies:
+    "@types/d3-path" "^2"
+
+"@types/d3-time-format@^3.0.0":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@types/d3-time-format/-/d3-time-format-3.0.1.tgz#1680fb6c41ab3a85db261ede296626668592246a"
+  integrity sha512-5GIimz5IqaRsdnxs4YlyTZPwAMfALu/wA4jqSiuqgdbCxUZ2WjrnwANqOtoBJQgeaUTdYNfALJO0Yb0YrDqduA==
+
+"@types/d3-time@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@types/d3-time/-/d3-time-1.1.1.tgz#6cf3a4242c3bbac00440dfb8ba7884f16bedfcbf"
+  integrity sha512-ULX7LoqXTCYtM+tLYOaeAJK7IwCT+4Gxlm2MaH0ErKLi07R5lh8NHCAyWcDkCCmx1AfRcBEV6H9QE9R25uP7jw==
+
+"@types/d3-time@^2":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@types/d3-time/-/d3-time-2.1.1.tgz#743fdc821c81f86537cbfece07093ac39b4bc342"
+  integrity sha512-9MVYlmIgmRR31C5b4FVSWtuMmBHh2mOWQYfl7XAYOa8dsnb7iEmUmRSWSFgXFtkjxO65d7hTUHQC+RhR/9IWFg==
+
 "@types/eslint-scope@^3.7.3":
   version "3.7.4"
   resolved "https://registry.npmjs.org/@types/eslint-scope/-/eslint-scope-3.7.4.tgz"
@@ -3687,7 +3815,7 @@
   resolved "https://registry.npmjs.org/@types/prettier/-/prettier-2.7.2.tgz"
   integrity sha512-KufADq8uQqo1pYKVIYzfKbJfBAc0sOeXqGbFaSpv8MRmC/zXgowNZmFcbngndGk922QDmOASEXUZCaY48gs4cg==
 
-"@types/prop-types@*":
+"@types/prop-types@*", "@types/prop-types@^15.7.2":
   version "15.7.5"
   resolved "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.5.tgz"
   integrity sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==
@@ -3711,6 +3839,13 @@
   version "18.0.11"
   resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-18.0.11.tgz"
   integrity sha512-O38bPbI2CWtgw/OoQoY+BRelw7uysmXbWvw3nLWO21H1HSh+GOlqPuXshJfjmpNlKiiSDG9cc1JZAaMmVdcTlw==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-lifecycles-compat@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@types/react-lifecycles-compat/-/react-lifecycles-compat-3.0.1.tgz#a0b1fe18cfb9435bd52737829a69cbe93faf32e2"
+  integrity sha512-4KiU5s1Go4xRbf7t6VxUUpBeN5PGjpjpBv9VvET4uiPHC500VNYBclU13f8ehHkHoZL39b2cfwHu6RzbV3b44A==
   dependencies:
     "@types/react" "*"
 
@@ -4200,6 +4335,18 @@ anymatch@^3.0.3, anymatch@~3.1.2:
   dependencies:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
+
+apexcharts@^3.40.0:
+  version "3.40.0"
+  resolved "https://registry.yarnpkg.com/apexcharts/-/apexcharts-3.40.0.tgz#9eccb50e38f12ddaeb6803ec781fb26e161853e3"
+  integrity sha512-dSi3BUfCJkFd67uFp+xffrJVd3lDT7AAUUyRp0qPYiglJ76CeZLddVhM3FAk1P9GCzf8VewqGYUPCYQvXm+b9A==
+  dependencies:
+    svg.draggable.js "^2.2.2"
+    svg.easing.js "^2.0.0"
+    svg.filter.js "^2.0.2"
+    svg.pathmorphing.js "^0.1.3"
+    svg.resize.js "^1.4.3"
+    svg.select.js "^3.0.1"
 
 arg@^5.0.2:
   version "5.0.2"
@@ -9761,7 +9908,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.8.1:
+prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -9880,6 +10027,13 @@ raw-body@2.5.1:
     http-errors "2.0.0"
     iconv-lite "0.4.24"
     unpipe "1.0.0"
+
+react-apexcharts@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-apexcharts/-/react-apexcharts-1.4.0.tgz#e3619104b34750da67a2ca80289dc87085c2aa27"
+  integrity sha512-DrcMV4aAMrUG+n6412yzyATWEyCDWlpPBBhVbpzBC4PDeuYU6iF84SmExbck+jx5MUm4U5PM3/T307Mc3kzc9Q==
+  dependencies:
+    prop-types "^15.5.7"
 
 react-app-polyfill@^3.0.0:
   version "3.0.0"
@@ -10951,6 +11105,61 @@ svg-parser@^2.0.2:
   version "2.0.4"
   resolved "https://registry.npmjs.org/svg-parser/-/svg-parser-2.0.4.tgz"
   integrity sha512-e4hG1hRwoOdRb37cIMSgzNsxyzKfayW6VOflrwvR+/bzrkyxY/31WkbgnQpgtrNp1SdpJvpUAGTa/ZoiPNDuRQ==
+
+svg.draggable.js@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/svg.draggable.js/-/svg.draggable.js-2.2.2.tgz#c514a2f1405efb6f0263e7958f5b68fce50603ba"
+  integrity sha512-JzNHBc2fLQMzYCZ90KZHN2ohXL0BQJGQimK1kGk6AvSeibuKcIdDX9Kr0dT9+UJ5O8nYA0RB839Lhvk4CY4MZw==
+  dependencies:
+    svg.js "^2.0.1"
+
+svg.easing.js@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/svg.easing.js/-/svg.easing.js-2.0.0.tgz#8aa9946b0a8e27857a5c40a10eba4091e5691f12"
+  integrity sha512-//ctPdJMGy22YoYGV+3HEfHbm6/69LJUTAqI2/5qBvaNHZ9uUFVC82B0Pl299HzgH13rKrBgi4+XyXXyVWWthA==
+  dependencies:
+    svg.js ">=2.3.x"
+
+svg.filter.js@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/svg.filter.js/-/svg.filter.js-2.0.2.tgz#91008e151389dd9230779fcbe6e2c9a362d1c203"
+  integrity sha512-xkGBwU+dKBzqg5PtilaTb0EYPqPfJ9Q6saVldX+5vCRy31P6TlRCP3U9NxH3HEufkKkpNgdTLBJnmhDHeTqAkw==
+  dependencies:
+    svg.js "^2.2.5"
+
+svg.js@>=2.3.x, svg.js@^2.0.1, svg.js@^2.2.5, svg.js@^2.4.0, svg.js@^2.6.5:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/svg.js/-/svg.js-2.7.1.tgz#eb977ed4737001eab859949b4a398ee1bb79948d"
+  integrity sha512-ycbxpizEQktk3FYvn/8BH+6/EuWXg7ZpQREJvgacqn46gIddG24tNNe4Son6omdXCnSOaApnpZw6MPCBA1dODA==
+
+svg.pathmorphing.js@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/svg.pathmorphing.js/-/svg.pathmorphing.js-0.1.3.tgz#c25718a1cc7c36e852ecabc380e758ac09bb2b65"
+  integrity sha512-49HWI9X4XQR/JG1qXkSDV8xViuTLIWm/B/7YuQELV5KMOPtXjiwH4XPJvr/ghEDibmLQ9Oc22dpWpG0vUDDNww==
+  dependencies:
+    svg.js "^2.4.0"
+
+svg.resize.js@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/svg.resize.js/-/svg.resize.js-1.4.3.tgz#885abd248e0cd205b36b973c4b578b9a36f23332"
+  integrity sha512-9k5sXJuPKp+mVzXNvxz7U0uC9oVMQrrf7cFsETznzUDDm0x8+77dtZkWdMfRlmbkEEYvUn9btKuZ3n41oNA+uw==
+  dependencies:
+    svg.js "^2.6.5"
+    svg.select.js "^2.1.2"
+
+svg.select.js@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/svg.select.js/-/svg.select.js-2.1.2.tgz#e41ce13b1acff43a7441f9f8be87a2319c87be73"
+  integrity sha512-tH6ABEyJsAOVAhwcCjF8mw4crjXSI1aa7j2VQR8ZuJ37H2MBUbyeqYr5nEO7sSN3cy9AR9DUwNg0t/962HlDbQ==
+  dependencies:
+    svg.js "^2.2.5"
+
+svg.select.js@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/svg.select.js/-/svg.select.js-3.0.1.tgz#a4198e359f3825739226415f82176a90ea5cc917"
+  integrity sha512-h5IS/hKkuVCbKSieR9uQCj9w+zLHoPh+ce19bBYyqF53g6mnPB8sAtIbe1s9dh2S2fCmYX2xel1Ln3PJBbK4kw==
+  dependencies:
+    svg.js "^2.6.5"
 
 svgo@^1.2.2:
   version "1.3.2"

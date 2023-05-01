@@ -39,6 +39,7 @@ import {
 } from '@chakra-ui/react'
 import { NseIndia } from "stock-nse-india";
 import ReturnsCalculator from '../dashComponents/ReturnsCalculator';
+import ReturnsPie from '../dashComponents/ReturnsPie';
 const nseIndia = new NseIndia()
 
 
@@ -47,6 +48,9 @@ const auth = getAuth();
 const RiskAppetite = () => {
 
   const navigate = useNavigate();
+
+  
+
 
   const [formData, setFormData] = useState(undefined);
   const [email, setEmail] = useState("");
@@ -405,13 +409,14 @@ const RiskAppetite = () => {
                     <div className="row">
                       <div className="col-md-auto">
                         <div className="container" style={{ background: "#2A2A2D", minHeight: "48vh", minWidth: "32vw", borderRadius: "20px", marginTop: "2.5vh" ,padding:0}} >
-                          <h1>sample</h1>
+                        <h4 style={{ color: "white", position: "relative", top: "1.5vh", left: "1.5vw",fontWeight:"bold",marginBottom:"2vh" }}>Returns Calculator</h4>
                           <ReturnsCalculator/>
                         </div>
                       </div>
                       <div className="col-md-auto">
                         <div className="container" style={{ background: "#2A2A2D", minHeight: "48vh", minWidth: "32vw", borderRadius: "20px", marginTop: "2.5vh" ,padding:0}} >
-                          <h1>sample</h1>
+                          {/* <h1>sample</h1> */}
+                          <ReturnsPie />
                         </div>
                       </div>
                     </div>
