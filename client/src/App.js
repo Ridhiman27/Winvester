@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Form from "./components/Form";
 import Dashboard from "./components/Dashboard.jsx";
 import RiskAppetite from "./components/pages/RiskAppetite.jsx";
+import Suggestions from "./components/pages/Suggestions.jsx";
 import Home from "./components/Home.jsx";
 import Signup from './components/Signup';
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/form" element={<Form/>} />
             <Route path="/dashboard" element={<Dashboard/>} />
             <Route path="/risk-appetite" element={<RiskAppetite/>} />
+            <Route path="/suggestions" element={<Suggestions/>} />
           </Routes>
       </Router>
     </>

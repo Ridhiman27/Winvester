@@ -49,8 +49,7 @@ const RiskAppetite = () => {
 
   const navigate = useNavigate();
 
-  
-
+  const [returnsValue,setReturnsValue ] = useState(0);
 
   const [formData, setFormData] = useState(undefined);
   const [email, setEmail] = useState("");
@@ -66,6 +65,14 @@ const RiskAppetite = () => {
   // alert
 
   // const myData = [{angle: 33}, {angle: 33}, {angle: 33}]
+
+  const calculateReturns = (data,value) => {
+    setReturnsValue(data)
+    console.log(`data received from calculator: ${data}`)
+    console.log(`data received from calculator: ${value}`)
+  }
+
+
 
   useEffect(() => {
 
@@ -352,6 +359,18 @@ const RiskAppetite = () => {
                         <a href="/form" style={{ color: "white", fontSize: "22px" }}>Questionnaire</a>
                       </div>
                     </div>
+                    <div className="row" style={{marginTop:"3vh",paddingTop:"10px",paddingBottom:"10px"}}>
+                      <div className="col-md-auto">
+                      <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M24.0322 13.4207C24.0322 18.8393 19.4944 23.2786 13.8382 23.2786C8.18202 23.2786 3.64422 18.8393 3.64422 13.4207C3.64422 8.00213 8.18202 3.5628 13.8382 3.5628C19.4944 3.5628 24.0322 8.00213 24.0322 13.4207Z" fill="white" stroke="white" stroke-width="1.79235"/>
+<path d="M22.4668 23.6969L28.6237 30.1493" stroke="white" stroke-width="1.79235" stroke-linecap="round"/>
+</svg>
+
+                      </div>
+                      <div className="col-md-auto">
+                        <a href="/suggestions" style={{color:"white",fontSize:"22px"}}>Suggestions</a>
+                      </div>
+                    </div>
                   </div>
                 </li>
               </ol>
@@ -410,7 +429,7 @@ const RiskAppetite = () => {
                       <div className="col-md-auto">
                         <div className="container" style={{ background: "#2A2A2D", minHeight: "48vh", minWidth: "32vw", borderRadius: "20px", marginTop: "2.5vh" ,padding:0}} >
                         <h4 style={{ color: "white", position: "relative", top: "1.5vh", left: "1.5vw",fontWeight:"bold",marginBottom:"2vh" }}>Returns Calculator</h4>
-                          <ReturnsCalculator/>
+                          <ReturnsCalculator data={calculateReturns}/>
                         </div>
                       </div>
                       <div className="col-md-auto">
