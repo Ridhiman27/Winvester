@@ -6,8 +6,6 @@ import numpy as np
 import scipy.optimize as sco
 import flask_cors
 import json
-from newsapi import NewsApiClient
-
 
 app = Flask(__name__)
 flask_cors.CORS(app)
@@ -19,13 +17,7 @@ model = pickle.load(open('ADANIPORTS', 'rb'))
 data = pd.read_csv("ADANIPORTS.csv")
 values = data[['Open', 'High', 'Low', 'Close']].values
 
-newsapi = NewsApiClient(api_key='212ddd1515a94319b104eb15647b72db')
 
-top_headlines = newsapi.get_top_headlines(category='business',country='in')
-
-@app.route('/news')
-def news():
-    return top_headlines
 
 
 @app.route('/risk-calculation')
