@@ -133,6 +133,36 @@ def returnPrediction():
     output = round(prediction.iloc[0], 2)
     return jsonify(float(output))
 
+@app.route('/predictstock')
+def returnPrediction():
+
+    c1 = ['ASIANPAINT.csv', 'BAJAJ-AUTO.csv', 'BAJAJFINSV.csv', 'BAJFINANCE.csv', 
+    'BRITANNIA.csv', 'DRREDDY.csv', 'GRASIM.csv', 'HEROMOTOCO.csv', 'INFY.csv', 'LT.csv', 
+    'MARUTI.csv', 'TCS.csv', 'ULTRACEMCO.csv']
+
+    c2 = ['AXISBANK.csv', 'BHARTIARTL.csv', 'COALINDIA.csv', 'HINDALCO.csv', 
+    'ICICIBANK.csv', 'ITC.csv', 'NTPC.csv', 'ONGC.csv', 'POWERGRID.csv', 'RELIANCE.csv', 
+    'SBIN.csv', ' TATAMOTORS.csv', 'TATASTEEL.csv', 'VEDL.csv', 'ZEEL.csv']
+
+    c3 = ['EICHERMOT.csv', 'NESTLEIND.csv', 'SHREECEM.csv']
+
+    c4 = ['ADANIPORTS.csv', 'BPCL.csv', 'CIPLA.csv', 'GAIL.csv', 'HCLTECH.csv', 
+    'HDFC.csv', 'HDFCBANK.csv', 'HINDUNILVR.csv', 'INDUSINDBK.csv', 'IOC.csv', 'JSWSTEEL.csv', 
+    'KOTAKBANK.csv', 'MM.csv', 'SUNPHARMA.csv', 'TECHM.csv', 'TITAN.csv', 'UPL.csv', 'WIPRO.csv']
+
+
+    prediction = model.predict(n_periods=100)
+    print(prediction)
+    output = round(prediction.iloc[0], 2)
+    return jsonify(float(output))
+
+@app.route('/predictmf')
+def returnPrediction():
+    prediction = model.predict(n_periods=100)
+    print(prediction)
+    output = round(prediction.iloc[0], 2)
+    return jsonify(float(output))
+
 
 @app.route("/")
 def hello():
