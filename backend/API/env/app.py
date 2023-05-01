@@ -6,8 +6,6 @@ import numpy as np
 import scipy.optimize as sco
 import flask_cors
 import json
-from newsapi import NewsApiClient
-
 
 app = Flask(__name__)
 flask_cors.CORS(app)
@@ -19,13 +17,7 @@ model = pickle.load(open('ADANIPORTS', 'rb'))
 data = pd.read_csv("ADANIPORTS.csv")
 values = data[['Open', 'High', 'Low', 'Close']].values
 
-newsapi = NewsApiClient(api_key='212ddd1515a94319b104eb15647b72db')
 
-top_headlines = newsapi.get_top_headlines(category='business',country='in')
-
-@app.route('/news')
-def news():
-    return top_headlines
 
 
 @app.route('/risk-calculation')
@@ -127,6 +119,36 @@ def mpt():
 
 
 @app.route('/predict')
+def returnPrediction():
+    prediction = model.predict(n_periods=100)
+    print(prediction)
+    output = round(prediction.iloc[0], 2)
+    return jsonify(float(output))
+
+@app.route('/predictstock')
+def returnPrediction():
+
+    c1 = ['ASIANPAINT.csv', 'BAJAJ-AUTO.csv', 'BAJAJFINSV.csv', 'BAJFINANCE.csv', 
+    'BRITANNIA.csv', 'DRREDDY.csv', 'GRASIM.csv', 'HEROMOTOCO.csv', 'INFY.csv', 'LT.csv', 
+    'MARUTI.csv', 'TCS.csv', 'ULTRACEMCO.csv']
+
+    c2 = ['AXISBANK.csv', 'BHARTIARTL.csv', 'COALINDIA.csv', 'HINDALCO.csv', 
+    'ICICIBANK.csv', 'ITC.csv', 'NTPC.csv', 'ONGC.csv', 'POWERGRID.csv', 'RELIANCE.csv', 
+    'SBIN.csv', ' TATAMOTORS.csv', 'TATASTEEL.csv', 'VEDL.csv', 'ZEEL.csv']
+
+    c3 = ['EICHERMOT.csv', 'NESTLEIND.csv', 'SHREECEM.csv']
+
+    c4 = ['ADANIPORTS.csv', 'BPCL.csv', 'CIPLA.csv', 'GAIL.csv', 'HCLTECH.csv', 
+    'HDFC.csv', 'HDFCBANK.csv', 'HINDUNILVR.csv', 'INDUSINDBK.csv', 'IOC.csv', 'JSWSTEEL.csv', 
+    'KOTAKBANK.csv', 'MM.csv', 'SUNPHARMA.csv', 'TECHM.csv', 'TITAN.csv', 'UPL.csv', 'WIPRO.csv']
+
+
+    prediction = model.predict(n_periods=100)
+    print(prediction)
+    output = round(prediction.iloc[0], 2)
+    return jsonify(float(output))
+
+@app.route('/predictmf')
 def returnPrediction():
     prediction = model.predict(n_periods=100)
     print(prediction)
