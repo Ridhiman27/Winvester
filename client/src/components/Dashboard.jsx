@@ -233,34 +233,6 @@ const Dashboard = () => {
         // }
       };
 
-      Q1
-// : 
-// "Very Unstable"
-// Q2
-// : 
-// 0
-// Q3
-// : 
-// "None"
-// Q4
-// : 
-// "Buy more of the investment"
-// Q5
-// : 
-// 1
-// Q6
-// : 
-// "Strongly Agree"
-// Q7
-// : 
-// "Savings account and fixed deposits"
-// Q8
-// : 
-// "h@gmail.com"
-// Q9
-// : 
-// 100000
-
       let financiallyDependent;
       if (formData[mainIndex]["Q2"] == 0) {
         financiallyDependent = 10;
