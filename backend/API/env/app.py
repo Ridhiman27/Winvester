@@ -6,6 +6,8 @@ import numpy as np
 import scipy.optimize as sco
 import flask_cors
 import json
+from pymarkowitz import *
+
 
 app = Flask(__name__)
 flask_cors.CORS(app)
@@ -18,11 +20,12 @@ data = pd.read_csv("ADANIPORTS.csv")
 values = data[['Open', 'High', 'Low', 'Close']].values
 
 
-
-
-@app.route('/risk-calculation')
+#**: http://0.0.0.0:5000/risk-calculation/risk_appetite
+@app.route('/risk-calculation/<risk_appetite>')
 # first version
-def mpt():
+def mpt(risk_appetite):
+
+    risk_appetite = float(risk_appetite)
 
     # Import data for each asset class
     stocks_data = pd.read_csv('stocks.csv')
@@ -56,12 +59,12 @@ def mpt():
     weights = np.ones(num_assets) / num_assets
 
     # Set target return and optimization bounds
+    #TODO:Set from risk appetite
     target_return = 0.1
     bounds = sco.Bounds(0, 1)
 
     # Perform mean-variance optimization to find optimal weights
     result = sco.minimize(objective_function, weights, args=(mean_returns, cov_matrix, target_return), method='SLSQP', constraints={'type': 'eq', 'fun': constraint_function}, bounds=bounds)
-    
     
     mutual_funds_list = ["Motilal Oswal Focused 25 Fund (MOF25) - Direct Plan Dividend Option",          "Motilal Oswal Focused 25 Fund (MOF25) - Regular Plan Dividend Option",          "Motilal Oswal Focused 25 Fund (MOF25)- Direct Plan Growth Option",          "Motilal Oswal Focused 25 Fund (MOF25)- Regular Plan Growth Option",          "SBI FOCUSED EQUITY FUND - DIRECT PLAN - DIVIDEND",          "SBI FOCUSED EQUITY FUND - DIRECT PLAN -GROWTH",          "SBI FOCUSED EQUITY FUND - REGULAR  PLAN - DIVIDEND",          "SBI FOCUSED EQUITY FUND - REGULAR PLAN -GROWTH",          "Baroda Banking And Financial Services Fund - Plan A - Bonus Option",          "Baroda Banking and Financial Services Fund - Plan A - Dividend",          "Baroda Banking and Financial Services Fund - Plan A - Growth Option",          "Sundaram Select Focus - Direct Plan - Dividend Option",          "Sundaram Select Focus - Direct Plan - Growth Option",          "Sundaram Select Focus-Dividend",          "Aditya Birla Sun Life Banking and Financial Services Fund - Direct Plan - Dividend",          "Aditya Birla Sun Life Banking and Financial Services Fund - Direct Plan - Growth",          "Aditya Birla Sun Life Banking and Financial Services Fund - Regular Plan - Dividend",          "Aditya Birla Sun Life Banking and Financial Services Fund - Regular Plan - Growth",          "HDFC Focused 30 Fund - DIVIDEND",          "HDFC Focused 30 Fund - GROWTH",          "HDFC Focused 30 Fund -Direct Plan - Dividend Option",          "ICICI Prudential Focused Equity Fund - Direct Plan - Dividend",          "ICICI Prudential Focused Equity Fund - Direct Plan - Growth",          "ICICI Prudential Focused Equity Fund - Dividend"]
     # tempList = []
@@ -117,51 +120,66 @@ def mpt():
     return resultArray
 
 
+#TODO:Limit the recommendation to fixed number
+#**: http://0.0.0.0:5000/recommendStock?riskFree=VVV&marketReturn=Feauure
+@app.route('/recommendStock',methods=['GET'])
+def recommendStock():
+   riskFree  = request.args.get('summary', None)
+   marketReturn = request.args.get('change', None)
+   
+   df = pd.read_csv("./stocks.csv")
+   selected = df.iloc[:3000, :]
 
-@app.route('/predict')
-def returnPrediction():
-    prediction = model.predict(n_periods=100)
-    print(prediction)
-    output = round(prediction.iloc[0], 2)
-    return jsonify(float(output))
+   ret_generator = ReturnGenerator(selected)
+   mu_return = ret_generator.calc_mean_return(method='geometric')
+   daily_return = ret_generator.calc_return(method='daily')
 
-@app.route('/predictstock')
-def returnPrediction():
+   mom_generator = MomentGenerator(daily_return)
+   benchmark = df.iloc[:3000].pct_change().dropna(how='any').sum(axis=1)/df.shape[1]
+   cov_matrix = mom_generator.calc_cov_mat()
+   beta_vec = mom_generator.calc_beta(benchmark)
+   PortOpt = Optimizer(mu_return, cov_matrix, beta_vec)
+   PortOpt.add_objective("min_volatility")
+   PortOpt.add_constraint("weight", weight_bound=(-1,1), leverage=1) # Portfolio Long/Short
+   PortOpt.add_constraint("concentration", top_holdings=2, top_concentration=0.5)
+   PortOpt.solve()
+   weight_dict, metric_dict = PortOpt.summary(risk_free=riskFree, market_return=marketReturn, top_holdings=1)
 
-    c1 = ['ASIANPAINT.csv', 'BAJAJ-AUTO.csv', 'BAJAJFINSV.csv', 'BAJFINANCE.csv', 
-    'BRITANNIA.csv', 'DRREDDY.csv', 'GRASIM.csv', 'HEROMOTOCO.csv', 'INFY.csv', 'LT.csv', 
-    'MARUTI.csv', 'TCS.csv', 'ULTRACEMCO.csv']
+   return jsonify(weight_dict,metric_dict)
 
-    c2 = ['AXISBANK.csv', 'BHARTIARTL.csv', 'COALINDIA.csv', 'HINDALCO.csv', 
-    'ICICIBANK.csv', 'ITC.csv', 'NTPC.csv', 'ONGC.csv', 'POWERGRID.csv', 'RELIANCE.csv', 
-    'SBIN.csv', ' TATAMOTORS.csv', 'TATASTEEL.csv', 'VEDL.csv', 'ZEEL.csv']
+#**: http://0.0.0.0:5000/predictstock/name
+@app.route('/predictstock/<name>',methods=['GET'])
+def predictstock(name):
 
-    c3 = ['EICHERMOT.csv', 'NESTLEIND.csv', 'SHREECEM.csv']
+    model = pickle.load(open("../Model/Stocks/"+name, 'rb'))
 
-    c4 = ['ADANIPORTS.csv', 'BPCL.csv', 'CIPLA.csv', 'GAIL.csv', 'HCLTECH.csv', 
-    'HDFC.csv', 'HDFCBANK.csv', 'HINDUNILVR.csv', 'INDUSINDBK.csv', 'IOC.csv', 'JSWSTEEL.csv', 
-    'KOTAKBANK.csv', 'MM.csv', 'SUNPHARMA.csv', 'TECHM.csv', 'TITAN.csv', 'UPL.csv', 'WIPRO.csv']
+    #prediction for 1000 days
+    prediction = model.predict(n_periods=1000)
+    # print(prediction)
 
+    pred_lst = prediction.tolist()
 
-    prediction = model.predict(n_periods=100)
-    print(prediction)
-    output = round(prediction.iloc[0], 2)
-    return jsonify(float(output))
+    json_data = json.dumps(pred_lst)
+    # output = round(prediction.iloc[0], 2)
 
-@app.route('/predictmf')
-def returnPrediction():
-    prediction = model.predict(n_periods=100)
-    print(prediction)
-    output = round(prediction.iloc[0], 2)
-    return jsonify(float(output))
+    return jsonify(json_data)
 
+#**: http://0.0.0.0:5000/predictmf/name
+@app.route('/predictmf/<name>',methods=['GET'])
+def predictmf(name):
 
-@app.route("/")
-def hello():
-    str1 = "hello world!"
-    return jsonify(str1)
+    model = pickle.load(open("../Model/MF/"+name, 'rb'))
 
+    #prediction for 1000 days
+    prediction = model.predict(n_periods=1000)
+    # print(prediction)
 
+    pred_lst = prediction.tolist()
+
+    json_data = json.dumps(pred_lst)
+    # output = round(prediction.iloc[0], 2)
+
+    return jsonify(json_data)
 
 if __name__ == "__main__":
     app.run(debug=True)

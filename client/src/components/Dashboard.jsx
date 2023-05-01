@@ -179,7 +179,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (formData && formData.length) {
       for (let i = 1; i < formData.length; i++) {
-        if (formData[i][8] == email) {
+        if (formData[i][8] === email) {
           setMainIndex(i);
         }
       }
@@ -241,7 +241,7 @@ const Dashboard = () => {
       };
 
       let financiallyDependent;
-      if (formData[mainIndex][2] == 0) {
+      if (formData[mainIndex][2] === 0) {
         financiallyDependent = 10;
       } else if (formData[mainIndex][2] < 5 && formData[mainIndex][2] > 0) {
         financiallyDependent = 20;
