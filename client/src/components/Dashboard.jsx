@@ -52,6 +52,8 @@ const Dashboard = () => {
 
   const navigate = useNavigate();
 
+  const [tmp,setTmp] = useState("");
+
   const [formData, setFormData] = useState(undefined);
   const [email, setEmail] = useState("");
   const [riskScore, setRiskScore] = useState(0);
@@ -88,81 +90,13 @@ const Dashboard = () => {
       try {
         const response = await axios.get("https://script.google.com/macros/s/AKfycbxn00JdZaEk5mLAqrr41ZrZqs3J6y-uHpshHkWj3pAWg-0Bq6e9Au5lr5KVbuM3fJhcnQ/exec");
         setFormData(response.data.data);
-        
-        await axios.get("https://nehaarane-fictional-meme-74jx6x66qjxfvqg-5000.preview.app.github.dev/risk-calculation")
-          .then(async (response) => {
-            console.log(`Portfolio segregated: ${response.data}`);
-            // setPieData(response.data);
-            setPieDataLoading(false);
-            // let pieResponse = await axios.get("https://vedxpatel-improved-robot-x4j9pjxv6xwh5x9-5000.preview.app.github.dev/pie")
-            // console.log(`Pie Chart Data: ${pieResponse.data}`)
-
-            // PIE CHART DATA 
-            let temp = response.data
-            let tempPieData = {}
-            for (let i = 0; i < temp.length; i++) {
-              let inputString = temp[i]
-              const parseString = (str) => {
-                const pairs = str.split(",");
-                const result = {};
-
-                for (let i = 0; i < pairs.length; i++) {
-                  const [key, value] = pairs[i].split(":");
-                  result[key.trim()] = parseFloat(value) || 0;
-                }
-                Object.assign(tempPieData, result)
-                return result;
-              }
-
-              const dataObj = parseString(inputString);
-              // console.log(dataObj);
-            }
-            console.log(tempPieData)
-
-            if (tempPieData["Mutual Funds"] < 15) { tempPieData["Mutual Funds"] = 15; tempPieData["Stock"] -= 15; }
-            setPieData(tempPieData)
-            setPieChartData([
-              {
-                "id": "stock",
-                "label": "stocks",
-                "value": tempPieData["Stock"],
-                "color": "hsl(66, 70%, 50%)"
-              },
-              {
-                "id": "mutual funds",
-                "label": "mutual funds",
-                "value": tempPieData["Mutual Funds"],
-                "color": "hsl(79, 70%, 50%)"
-              },
-              {
-                "id": "gold",
-                "label": "gold",
-                "value": tempPieData["GOLD"],
-                "color": "hsl(264, 70%, 50%)"
-              },
-              {
-                "id": "etf",
-                "label": "etf",
-                "value": 0,
-                "color": "hsl(265, 70%, 50%)"
-              },
-              {
-                "id": "government schemes",
-                "label": "government schemes",
-                "value": 0,
-                "color": "hsl(270, 70%, 50%)"
-              }])
-            // PIE CHART DATA 
-
-
-          })
-          .catch((error) => console.error(error))
-
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
+
+    
 
   }, [])
 
@@ -265,8 +199,94 @@ const Dashboard = () => {
       // // Return risk score
       console.log(riskScore);
       setRiskScoreLoading(true);
+      
+      if(riskScore < 25){
+        setTmp("low");
+      }else if (riskScore >= 25 && riskScore < 50){
+        setTmp("moderate")
+      }else if (riskScore >= 50 && riskScore < 75){
+        setTmp("high")
+      }else{
+        setTmp("very high");
+      }
+
+      if(tmp.length > 0){
+        fetchData2(tmp);
+      }
+      
     }
   }, [formData])
+
+  const fetchData2 = async (data) => {
+    await axios.get(`https://nehaarane-fictional-meme-74jx6x66qjxfvqg-5000.preview.app.github.dev/risk-calculation/${data}`)
+    .then(async (response) => {
+      console.log(`Portfolio segregated: ${response.data}`);
+      // setPieData(response.data);
+      setPieDataLoading(false);
+      // let pieResponse = await axios.get("https://vedxpatel-improved-robot-x4j9pjxv6xwh5x9-5000.preview.app.github.dev/pie")
+      // console.log(`Pie Chart Data: ${pieResponse.data}`)
+
+      // PIE CHART DATA 
+      let temp = response.data
+      let tempPieData = {}
+      for (let i = 0; i < temp.length; i++) {
+        let inputString = temp[i]
+        const parseString = (str) => {
+          const pairs = str.split(",");
+          const result = {};
+
+          for (let i = 0; i < pairs.length; i++) {
+            const [key, value] = pairs[i].split(":");
+            result[key.trim()] = parseFloat(value) || 0;
+          }
+          Object.assign(tempPieData, result)
+          return result;
+        }
+
+        const dataObj = parseString(inputString);
+        // console.log(dataObj);
+      }
+      console.log(tempPieData)
+
+      if (tempPieData["Mutual Funds"] < 15) { tempPieData["Mutual Funds"] = 15; tempPieData["Stock"] -= 15; }
+      setPieData(tempPieData)
+      setPieChartData([
+        {
+          "id": "stock",
+          "label": "stocks",
+          "value": tempPieData["Stock"],
+          "color": "hsl(66, 70%, 50%)"
+        },
+        {
+          "id": "mutual funds",
+          "label": "mutual funds",
+          "value": tempPieData["Mutual Funds"],
+          "color": "hsl(79, 70%, 50%)"
+        },
+        {
+          "id": "gold",
+          "label": "gold",
+          "value": tempPieData["GOLD"],
+          "color": "hsl(264, 70%, 50%)"
+        },
+        {
+          "id": "etf",
+          "label": "etf",
+          "value": 0,
+          "color": "hsl(265, 70%, 50%)"
+        },
+        {
+          "id": "government schemes",
+          "label": "government schemes",
+          "value": 0,
+          "color": "hsl(270, 70%, 50%)"
+        }])
+      // PIE CHART DATA 
+
+
+    })
+    .catch((error) => console.error(error))
+  }
 
 
   console.log(formData);

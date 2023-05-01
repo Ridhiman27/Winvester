@@ -34,7 +34,7 @@ def news():
 # first version
 def mpt(risk_appetite):
 
-    risk_appetite = float(risk_appetite)
+    # risk_appetite = float(risk_appetite)
 
     # Import data for each asset class
     stocks_data = pd.read_csv('stocks.csv')
@@ -69,7 +69,19 @@ def mpt(risk_appetite):
 
     # Set target return and optimization bounds
     #TODO:Set from risk appetite
-    target_return = 0.1
+
+    def get_target_return(risk_appetite):
+        risk_appetite = risk_appetite.lower()
+        if risk_appetite == "low":
+            return 0.05
+        elif risk_appetite == "moderate":
+            return 0.1
+        elif risk_appetite == "high":
+            return 0.15
+        elif risk_appetite == "very high":
+            return 0.2
+
+    target_return = get_target_return(risk_appetite)
     bounds = sco.Bounds(0, 1)
 
     # Perform mean-variance optimization to find optimal weights
@@ -157,7 +169,7 @@ def recommendStock():
    return jsonify(weight_dict,metric_dict)
 
 #**: http://0.0.0.0:5000/predictmf/name
-@app.route('/predictstock')
+@app.route('/predictstock/<name>',methods=['GET'])
 def predictstock(name):
 
     model = pickle.load(open("../Model/Stocks/"+name, 'rb'))
