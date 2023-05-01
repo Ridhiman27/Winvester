@@ -172,7 +172,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (formData && formData.length) {
       for (let i = 1; i < formData.length; i++) {
-        if (formData[i]["Q8"] === email) {
+        if (formData[i]["Q8"] == email) {
           setMainIndex(i);
         }
       }
