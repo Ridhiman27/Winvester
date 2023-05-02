@@ -12,6 +12,7 @@ import Signup from './components/Signup';
 import Logout from './components/Logout';
 import Prediction from './components/pages/Prediction';
 import PredictionMF from './components/pages/PredictionMF';
+import Brokers from './components/pages/Brokers';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="/recommendations" element={<Recommendations/>} />
             <Route path="/prediction" element={<Prediction/>} />
             <Route path="/predictionMF" element={<PredictionMF/>} />
+            <Route path="/brokers" element={<Brokers/>} />
           </Routes>
       </Router>
     </>
