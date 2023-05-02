@@ -309,12 +309,15 @@ const Recommendations = () => {
 
     // console.log(formData);
 
+    const [stockRecommendData,setStockRecommendData] = useState({});
+
     useEffect(()=>{
 
         const fetchStocksData = async() =>{
             await axios.get(`https://vedxpatel-stunning-xylophone-9xpq5pwjrr7f9rgw-5000.preview.app.github.dev/recommendStock?riskFree=${riskFree}&marketReturn=${marketReturn}`)
             .then((response)=>{
                 console.log(response.data);
+                setStockRecommendData(response.data);
             })
         }
         fetchStocksData();
@@ -476,6 +479,17 @@ const Recommendations = () => {
                                         </AccordionButton>
                                     </h2>
                                     <AccordionPanel pb={4}>
+                                        <div className="container" style={{height:"20vh",overflowY:"scroll"}}>
+                                        {
+                                            Object.keys(stockRecommendData).map((data)=>{
+                                                return(
+                                                    <>
+                                                        <h5>{data} : {num.toFixed(stockRecommendData[data])}</h5>
+                                                    </>
+                                                )
+                                            })
+                                        }
+                                        </div>
                                     </AccordionPanel>
                                 </AccordionItem>
                                 <AccordionItem>
