@@ -10,6 +10,8 @@ import Recommendations from "./components/pages/Recommendations.jsx";
 import Home from "./components/Home.jsx";
 import Signup from './components/Signup';
 import Logout from './components/Logout';
+import Prediction from './components/pages/Prediction';
+import PredictionMF from './components/pages/PredictionMF';
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
             <Route path="/suggestions" element={<Suggestions/>} />
             <Route path="/logout" element={<Logout/>} />
             <Route path="/recommendations" element={<Recommendations/>} />
+            <Route path="/prediction" element={<Prediction/>} />
+            <Route path="/predictionMF" element={<PredictionMF/>} />
           </Routes>
       </Router>
     </>

@@ -53,7 +53,7 @@ def mpt(risk_appetite):
     # Calculate covariance matrix for returns
     cov_matrix = returns.cov()
 
-    # Define objective function to minimize portfolio risk for a given expected return
+    # Define objective function to minimize portfolio`` risk for a given expected return
     def objective_function(weights, mean_returns, cov_matrix, target_return):
         portfolio_return = np.sum(mean_returns * weights) * 252
         portfolio_std_dev = np.sqrt(np.dot(weights.T, np.dot(cov_matrix, weights))) * np.sqrt(252)
@@ -212,7 +212,7 @@ def predictstock(name):
 
     json_data = json.dumps(pred_lst)
 
-    return jsonify(json_data)
+    return json_data
 
 #**: http://0.0.0.0:5000/predictmf/name
 @app.route('/predictmf/<name>',methods=['GET'])
@@ -227,7 +227,7 @@ def predictmf(name):
 
     json_data = json.dumps(pred_lst)
 
-    return jsonify(json_data)
+    return json_data
 
 if __name__ == "__main__":
     app.run(debug=True)

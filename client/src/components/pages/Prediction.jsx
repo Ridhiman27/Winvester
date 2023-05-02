@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "../dashboard.scss";
 import axios from "axios";
-import { useFormAction, useNavigate ,Link} from 'react-router-dom';
+import { useFormAction, useNavigate,useLocation } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
     AlertDialog,
@@ -45,13 +45,14 @@ import {
     AccordionIcon,
     Box
   } from '@chakra-ui/react'
+import StockChart from './StockChart';
 
 
 const auth = getAuth();
 
 
 
-const Recommendations = () => {
+const Prediction = () => {
 
 
     const navigate = useNavigate();
@@ -82,7 +83,6 @@ const Recommendations = () => {
             if (user) {
                 let tempEmail = user.email;
                 setEmail(String(tempEmail));
-                console.log(tempEmail);
                 // const uid = user.uid;
                 // ...
 
@@ -204,7 +204,7 @@ const Recommendations = () => {
 
             setRiskScore(Math.ceil(refactor));
             // // Return risk score
-            console.log(riskScore);
+            // console.log(riskScore);
 
 
             if (riskScore < 25) {
@@ -238,7 +238,7 @@ const Recommendations = () => {
 
         await axios.get(`https://vedxpatel-expert-invention-rxjr6jwp9vqcwjxp-5000.preview.app.github.dev/risk-calculation/${data}`)
             .then(async (response) => {
-                console.log(`Portfolio segregated: ${response.data}`);
+                // console.log(`Portfolio segregated: ${response.data}`);
                 // setPieData(response.data);
                 setPieDataLoading(false);
                 // let pieResponse = await axios.get("https://vedxpatel-improved-robot-x4j9pjxv6xwh5x9-5000.preview.app.github.dev/pie")
@@ -264,7 +264,7 @@ const Recommendations = () => {
                     const dataObj = parseString(inputString);
                     // console.log(dataObj);
                 }
-                console.log(tempPieData)
+                // console.log(tempPieData)
 
                 if (tempPieData["Mutual Funds"] < 15) { tempPieData["Mutual Funds"] = 15; tempPieData["Stock"] -= 15; }
                 setPieData(tempPieData)
@@ -312,12 +312,18 @@ const Recommendations = () => {
     const [stockRecommendData,setStockRecommendData] = useState({});
     const [MFRecommendData,setMFRecommendData] = useState({});
 
+    const location = useLocation();
+    const propsData = location.state;
+    // console.log(propsData);
+
+
+
+
     useEffect(()=>{
 
         const fetchStocksData = async() =>{
             await axios.get(`https://vedxpatel-expert-invention-rxjr6jwp9vqcwjxp-5000.preview.app.github.dev/recommendStock?riskFree=${riskFree}&marketReturn=${marketReturn}`)
             .then((response)=>{
-                console.log(response.data);
                 setStockRecommendData(response.data);
             })
         }
@@ -326,13 +332,32 @@ const Recommendations = () => {
         const fetchMFData = async() => {
             await axios.get(`https://vedxpatel-expert-invention-rxjr6jwp9vqcwjxp-5000.preview.app.github.dev/recommendMF?riskFree=${riskFree}&marketReturn=${marketReturn}`)
             .then((response)=>{
-                console.log(response.data);
                 setMFRecommendData(response.data);
             })
         }
         fetchMFData();
     },[])
 
+    const [predictionData,setPredictionData] = useState([]);
+    const [predictionArray,setPredictionArray] = useState([]);
+    let tempData = [];
+    useEffect(()=>{
+
+        axios.get(`https://vedxpatel-expert-invention-rxjr6jwp9vqcwjxp-5000.preview.app.github.dev/predictstock/${propsData}`)
+        .then((response)=>{
+            setPredictionData(response.data);
+            predictionDataAddition();
+        })
+        .catch((err)=>console.log(err))
+        
+    },[])
+    
+    const predictionDataAddition = () => {
+        for (let i = 0; i < predictionData.length; i++) {
+            tempData.push(predictionData[i]);
+        }
+        setPredictionArray(tempData);
+    }
 
 
 
@@ -447,96 +472,36 @@ const Recommendations = () => {
                         </div>
                     </div>
                     <div className="col-md-auto" style={{ width: "54vw" }}>
-                        <h2 style={{ color: "white", marginBottom: "5vh", color: "white", position: "relative", top: "1.5vh", fontWeight: "bold", marginTop: "2vh" }}>Recommendations</h2>
+                        <h2 style={{ color: "white", marginBottom: "5vh", color: "white", position: "relative", top: "1.5vh", fontWeight: "bold", marginTop: "2vh" }}>Prediction</h2>
                         <div className="container" style={{ margin: 0, padding: 0, width: "80vw" }}>
                             <div className="row">
                                 <div className="col-md-auto">
-                                    <div className="container" style={{ background: "#2A2A2D", minHeight: "35vh", width: "34vw", borderRadius: "20px" }} >
-                                        <div className="row" style={{ display: "flex" }}>
-                                            <div className="container" style={{ height: "35vh", float: "left" }}>
-                                                <Pie data={pieChartData} />
-                                            </div>
+                                    <div className="container" style={{ background: "#2A2A2D", height: "85vh", width: "70vw", borderRadius: "20px" }} >
+                                        <div className="container" style={{height:"40vh"}}>
+                                            <StockChart data={predictionData}/>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-auto">
-                                    <div className="container" style={{ background: "#2A2A2D", minHeight: "35vh", width: "34vw", borderRadius: "20px" }}>
-                                        <Wrap style={{ float: "right" }}>
-                                            {
-                                                Object.keys(pieData).map((keyName, i) => (
-                                                    <WrapItem>
-                                                        <Stat key={i} style={{ color: "white", marginRight: "2vw" }} >
-                                                            <StatLabel>{keyName}</StatLabel>
-                                                            <StatNumber>{pieData[keyName]} %</StatNumber>
-                                                        </Stat>
-                                                    </WrapItem>
-                                                ))
-                                            }
-                                        </Wrap>
-                                    </div>
-                                </div>
+                                     <div className="container" style={{height:"40vh",overflowY:"scroll"}}>
+                            {
+                                predictionData.map((data)=>{
+                                    return(
+                                        <>
+                                            <p style={{color:"white"}}>{data}</p>
+                                            {/* {console.log(predictionData)} */}
+                                        </>
+                                    )
+                                })
+                            }
                             </div>
-                        </div>
-                        <div className="container" style={{ minHeight: "35vh", background: "#2A2A2D", borderRadius: "20px", width: "70vw", margin: 0, marginTop: "3vh",color:"white",padding:"5vh" }}>
-                            <Accordion defaultIndex={[0]} allowToggle>
-                                <AccordionItem>
-                                    <h2>
-                                        <AccordionButton>
-                                            <Box as="span" flex='1' textAlign='left'>
-                                                Stocks
-                                            </Box>
-                                            <AccordionIcon />
-                                        </AccordionButton>
-                                    </h2>
-                                    <AccordionPanel pb={4}>
-                                        <div className="container" style={{maxHeight:"20vh",overflowY:"scroll"}}>
-                                        {
-                                            Object.keys(stockRecommendData).map((data)=>{
-                                                return(
-                                                    <>
-                                                    <Link to="/prediction" state={data} >
-                                                        <h5>{data} : {stockRecommendData[data] * 100}%</h5>
-                                                    </Link>
-                                                    </>
-                                                )
-                                            })
-                                        }
-                                        </div>
-                                    </AccordionPanel>
-                                </AccordionItem>
-                                <AccordionItem>
-                                    <h2>
-                                        <AccordionButton>
-                                            <Box as="span" flex='1' textAlign='left'>
-                                                Mutual Funds
-                                            </Box>
-                                            <AccordionIcon />
-                                        </AccordionButton>
-                                    </h2>
-                                    <AccordionPanel pb={4}>
-                                    <div className="container" style={{maxHeight:"20vh",overflowY:"scroll"}}>
-                                        {
-                                            Object.keys(MFRecommendData).map((data)=>{
-                                                return(
-                                                    <>
-                                                    <Link to="/predictionMF" state={data} >
-                                                        <h5>{data} : {MFRecommendData[data] * 100}%</h5>
-                                                    </Link>
-                                                    </>
-                                                )
-                                            })
-                                        }
-                                        </div>
-                                    </AccordionPanel>
-                                </AccordionItem>
-                            </Accordion>
-                        </div>
                     </div>
-                </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
 
+                </div>
             </div>
         </div>
     )
 }
 
-export default Recommendations
+export default Prediction;
