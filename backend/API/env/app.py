@@ -171,7 +171,7 @@ def recommendStock():
 
 #**: http://0.0.0.0:5000/recommendMF?riskFree=VVV&marketReturn=Feauure
 @app.route('/recommendMF',methods=['GET'])
-def recommendStock():
+def recommendMF():
    riskFree  = float(request.args.get('riskFree'))
    marketReturn = float(request.args.get('marketReturn'))
    
