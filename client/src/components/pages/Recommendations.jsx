@@ -36,13 +36,14 @@ import {
     TableCaption,
     TableContainer,
 } from '@chakra-ui/react'
+import Pie from '../dashComponents/Pie';
 
 
 const auth = getAuth();
 
 
 
-const Dashboard = () => {
+const Recommendations = () => {
 
 
     const navigate = useNavigate();
@@ -401,7 +402,36 @@ const Dashboard = () => {
                     </div>
                     <div className="col-md-auto" style={{ width: "54vw" }}>
                         <h2 style={{ color: "white", marginBottom: "5vh", color: "white", position: "relative", top: "1.5vh", fontWeight: "bold", marginTop: "2vh" }}>Recommendations</h2>
-
+                        <div className="container" style={{margin:0,padding:0}}>
+                            <div className="row">
+                                <div className="col-md-auto">
+                                    <div className="container" style={{ background: "#2A2A2D", minHeight: "35vh", width: "33vw", borderRadius: "20px" }} >
+                                        {console.log(pieChartData)}
+                                        <div className="row" style={{ display: "flex" }}>
+                                            <div className="container" style={{ height: "35vh", float: "left" }}>
+                                                <Pie data={pieChartData} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-auto">
+                                    <div className="container" style={{ background: "#2A2A2D", minHeight: "35vh", width: "33vw", borderRadius: "20px" }}>
+                                        <Wrap style={{ float: "right" }}>
+                                            {
+                                                Object.keys(pieData).map((keyName, i) => (
+                                                    <WrapItem>
+                                                        <Stat key={i} style={{ color: "white", marginRight: "2vw" }} >
+                                                            <StatLabel>{keyName}</StatLabel>
+                                                            <StatNumber>{pieData[keyName]} %</StatNumber>
+                                                        </Stat>
+                                                    </WrapItem>
+                                                ))
+                                            }
+                                        </Wrap>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -410,4 +440,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard
+export default Recommendations
