@@ -149,14 +149,14 @@ def recommendStock():
    marketReturn = float(request.args.get('marketReturn'))
    
    df = pd.read_csv("./stocks.csv")
-   selected = df.iloc[:3000, :]
+   selected = df.iloc[:1000, :]
 
    ret_generator = ReturnGenerator(selected)
    mu_return = ret_generator.calc_mean_return(method='geometric')
    daily_return = ret_generator.calc_return(method='daily')
 
    mom_generator = MomentGenerator(daily_return)
-   benchmark = df.iloc[:3000].pct_change().dropna(how='any').sum(axis=1)/df.shape[1]
+   benchmark = df.iloc[:1000].pct_change().dropna(how='any').sum(axis=1)/df.shape[1]
    cov_matrix = mom_generator.calc_cov_mat()
    beta_vec = mom_generator.calc_beta(benchmark)
    PortOpt = Optimizer(mu_return, cov_matrix, beta_vec)
@@ -165,37 +165,40 @@ def recommendStock():
    PortOpt.add_constraint("concentration", top_holdings=2, top_concentration=0.5)
    PortOpt.solve()
    weight_dict, metric_dict = PortOpt.summary(risk_free=riskFree, market_return=marketReturn, top_holdings=1)
+   print("hi")
+   data = {'Stocks': weight_dict, 'Metrics': metric_dict}
 
-   return jsonify(weight_dict,metric_dict)
-
+   return jsonify(weight_dict)
 
 #**: http://0.0.0.0:5000/recommendMF?riskFree=VVV&marketReturn=Feauure
 @app.route('/recommendMF',methods=['GET'])
 def recommendMF():
-   riskFree  = float(request.args.get('riskFree'))
-   marketReturn = float(request.args.get('marketReturn'))
-   
-   df = pd.read_csv("./mutualfunds.csv")
-   selected = df.iloc[:1400, :]
+    riskFree  = float(request.args.get('riskFree'))
+    marketReturn = float(request.args.get('marketReturn'))
+    
+    df = pd.read_csv("./mutualfunds.csv")
+    selected = df.iloc[:1000, :]
 
-   ret_generator = ReturnGenerator(selected)
-   mu_return = ret_generator.calc_mean_return(method='geometric')
-   daily_return = ret_generator.calc_return(method='daily')
+    ret_generator = ReturnGenerator(selected)
+    mu_return = ret_generator.calc_mean_return(method='geometric')
+    daily_return = ret_generator.calc_return(method='daily')
 
-   mom_generator = MomentGenerator(daily_return)
-   benchmark = df.iloc[:1400].pct_change().dropna(how='any').sum(axis=1)/df.shape[1]
-   cov_matrix = mom_generator.calc_cov_mat()
-   beta_vec = mom_generator.calc_beta(benchmark)
-   PortOpt = Optimizer(mu_return, cov_matrix, beta_vec)
-   PortOpt.add_objective("min_volatility")
-   PortOpt.add_constraint("weight", weight_bound=(-1,1), leverage=1) # Portfolio Long/Short
-   PortOpt.add_constraint("concentration", top_holdings=2, top_concentration=0.5)
-   PortOpt.solve()
-   weight_dict, metric_dict = PortOpt.summary(risk_free=riskFree, market_return=marketReturn, top_holdings=1)
+    mom_generator = MomentGenerator(daily_return)
+    benchmark = df.iloc[:1000].pct_change().dropna(how='any').sum(axis=1)/df.shape[1]
+    cov_matrix = mom_generator.calc_cov_mat()
+    beta_vec = mom_generator.calc_beta(benchmark)
+    PortOpt = Optimizer(mu_return, cov_matrix, beta_vec)
+    PortOpt.add_objective("min_volatility")
+    PortOpt.add_constraint("weight", weight_bound=(-1,1), leverage=1) # Portfolio Long/Short
+    PortOpt.add_constraint("concentration", top_holdings=2, top_concentration=0.5)
+    PortOpt.solve()
+    weight_dict, metric_dict = PortOpt.summary(risk_free=riskFree, market_return=marketReturn, top_holdings=1)
 
-   return jsonify(weight_dict,metric_dict)
+    data = {'Stocks': weight_dict, 'Metrics': metric_dict}
 
-#**: http://0.0.0.0:5000/predictmf/name
+    return jsonify(weight_dict)
+
+#**: http://0.0.0.0:5000/predictstock/name
 @app.route('/predictstock/<name>',methods=['GET'])
 def predictstock(name):
 
