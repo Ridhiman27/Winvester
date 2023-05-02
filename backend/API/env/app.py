@@ -150,7 +150,7 @@ def recommendStock():
    marketReturn = float(request.args.get('marketReturn'))
    
    df = pd.read_csv("./stocks.csv")
-   selected = df.iloc[:1000, :]
+   selected = df.iloc[:1000, np.random.choice(np.arange(0, df.shape[1]), 40, replace=False)]
 
    ret_generator = ReturnGenerator(selected)
    mu_return = ret_generator.calc_mean_return(method='geometric')
@@ -162,13 +162,13 @@ def recommendStock():
    beta_vec = mom_generator.calc_beta(benchmark)
    PortOpt = Optimizer(mu_return, cov_matrix, beta_vec)
    PortOpt.add_objective("min_volatility")
-   PortOpt.add_constraint("weight", weight_bound=(-1,1), leverage=1) # Portfolio Long/Short
-   PortOpt.add_constraint("concentration", top_holdings=2, top_concentration=0.5)
+   PortOpt.add_constraint("weight", weight_bound=(0,1), leverage=1) # Portfolio Long/Short
+   PortOpt.add_constraint("concentration", top_holdings=5, top_concentration=0.5)
    PortOpt.solve()
-   weight_dict, metric_dict = PortOpt.summary(risk_free=riskFree, market_return=marketReturn, top_holdings=1)
+   weight_dict, metric_dict = PortOpt.summary(risk_free=riskFree, market_return=marketReturn, top_holdings=5)
    print("hi")
    data = {'Stocks': weight_dict, 'Metrics': metric_dict}
-
+   print(metric_dict)
    return jsonify(weight_dict)
 
 #**: http://0.0.0.0:5000/recommendMF?riskFree=VVV&marketReturn=Feauure
@@ -191,9 +191,9 @@ def recommendMF():
     PortOpt = Optimizer(mu_return, cov_matrix, beta_vec)
     PortOpt.add_objective("min_volatility")
     PortOpt.add_constraint("weight", weight_bound=(-1,1), leverage=1) # Portfolio Long/Short
-    PortOpt.add_constraint("concentration", top_holdings=2, top_concentration=0.5)
+    PortOpt.add_constraint("concentration", top_holdings=5, top_concentration=0.5)
     PortOpt.solve()
-    weight_dict, metric_dict = PortOpt.summary(risk_free=riskFree, market_return=marketReturn, top_holdings=1)
+    weight_dict, metric_dict = PortOpt.summary(risk_free=riskFree, market_return=marketReturn, top_holdings=5)
 
     data = {'Stocks': weight_dict, 'Metrics': metric_dict}
 

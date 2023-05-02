@@ -209,12 +209,20 @@ const Recommendations = () => {
 
             if (riskScore < 25) {
                 setTmp("low");
+                setRiskFree(0.02);
+                setMarketReturn(0.08);
             } else if (riskScore >= 25 && riskScore < 50) {
-                setTmp("moderate")
+                setTmp("moderate");
+                setRiskFree(0.05);
+                setMarketReturn(0.10);
             } else if (riskScore >= 50 && riskScore < 75) {
-                setTmp("high")
+                setTmp("high");
+                setRiskFree(0.07);
+                setMarketReturn(0.12);
             } else {
                 setTmp("very high");
+                setRiskFree(0.10);
+                setMarketReturn(0.15);
             }
 
             if (tmp.length > 0) {
@@ -299,13 +307,15 @@ const Recommendations = () => {
     }
 
 
-    console.log(formData);
+    // console.log(formData);
 
     useEffect(()=>{
 
         const fetchStocksData = async() =>{
-            const response = await axios.get("https://vedxpatel-stunning-xylophone-9xpq5pwjrr7f9rgw-5000.preview.app.github.dev/recommendStock/")
-            console.log(response.data);
+            await axios.get(`https://vedxpatel-stunning-xylophone-9xpq5pwjrr7f9rgw-5000.preview.app.github.dev/recommendStock?riskFree=${riskFree}&marketReturn=${marketReturn}`)
+            .then((response)=>{
+                console.log(response.data);
+            })
         }
         fetchStocksData();
     },[])
@@ -429,7 +439,6 @@ const Recommendations = () => {
                             <div className="row">
                                 <div className="col-md-auto">
                                     <div className="container" style={{ background: "#2A2A2D", minHeight: "35vh", width: "34vw", borderRadius: "20px" }} >
-                                        {console.log(pieChartData)}
                                         <div className="row" style={{ display: "flex" }}>
                                             <div className="container" style={{ height: "35vh", float: "left" }}>
                                                 <Pie data={pieChartData} />
