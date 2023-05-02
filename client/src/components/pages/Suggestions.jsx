@@ -146,7 +146,7 @@ const Suggestions = () => {
 
                       </div>
                       <div className="col-md-auto">
-                        <a href="/dashboard" style={{ color: "white", fontSize: "22px" }}>Recommendations</a>
+                        <a href="/recommendations" style={{ color: "white", fontSize: "22px" }}>Recommendations</a>
                       </div>
                     </div>
                     <div className="row" style={{ marginTop: "3vh", paddingTop: "10px", paddingBottom: "10px" }}>
