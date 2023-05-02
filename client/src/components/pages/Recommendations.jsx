@@ -236,7 +236,7 @@ const Recommendations = () => {
 
     const fetchData2 = async (data) => {
 
-        await axios.get(`https://vedxpatel-stunning-xylophone-9xpq5pwjrr7f9rgw-5000.preview.app.github.dev/risk-calculation/${data}`)
+        await axios.get(`https://vedxpatel-expert-invention-rxjr6jwp9vqcwjxp-5000.preview.app.github.dev/risk-calculation/${data}`)
             .then(async (response) => {
                 console.log(`Portfolio segregated: ${response.data}`);
                 // setPieData(response.data);
@@ -310,17 +310,27 @@ const Recommendations = () => {
     // console.log(formData);
 
     const [stockRecommendData,setStockRecommendData] = useState({});
+    const [MFRecommendData,setMFRecommendData] = useState({});
 
     useEffect(()=>{
 
         const fetchStocksData = async() =>{
-            await axios.get(`https://vedxpatel-stunning-xylophone-9xpq5pwjrr7f9rgw-5000.preview.app.github.dev/recommendStock?riskFree=${riskFree}&marketReturn=${marketReturn}`)
+            await axios.get(`https://vedxpatel-expert-invention-rxjr6jwp9vqcwjxp-5000.preview.app.github.dev/recommendStock?riskFree=${riskFree}&marketReturn=${marketReturn}`)
             .then((response)=>{
                 console.log(response.data);
                 setStockRecommendData(response.data);
             })
         }
         fetchStocksData();
+
+        const fetchMFData = async() => {
+            await axios.get(`https://vedxpatel-expert-invention-rxjr6jwp9vqcwjxp-5000.preview.app.github.dev/recommendMF?riskFree=${riskFree}&marketReturn=${marketReturn}`)
+            .then((response)=>{
+                console.log(response.data);
+                setMFRecommendData(response.data);
+            })
+        }
+        fetchMFData();
     },[])
 
 
@@ -468,7 +478,7 @@ const Recommendations = () => {
                             </div>
                         </div>
                         <div className="container" style={{ minHeight: "35vh", background: "#2A2A2D", borderRadius: "20px", width: "70vw", margin: 0, marginTop: "3vh",color:"white",padding:"5vh" }}>
-                            <Accordion defaultIndex={[0]} allowMultiple>
+                            <Accordion defaultIndex={[0]} allowToggle>
                                 <AccordionItem>
                                     <h2>
                                         <AccordionButton>
@@ -479,12 +489,12 @@ const Recommendations = () => {
                                         </AccordionButton>
                                     </h2>
                                     <AccordionPanel pb={4}>
-                                        <div className="container" style={{height:"20vh",overflowY:"scroll"}}>
+                                        <div className="container" style={{maxHeight:"20vh",overflowY:"scroll"}}>
                                         {
                                             Object.keys(stockRecommendData).map((data)=>{
                                                 return(
                                                     <>
-                                                        <h5>{data} : {num.toFixed(stockRecommendData[data])}</h5>
+                                                        <h5>{data} : {stockRecommendData[data] * 100}%</h5>
                                                     </>
                                                 )
                                             })
@@ -502,10 +512,17 @@ const Recommendations = () => {
                                         </AccordionButton>
                                     </h2>
                                     <AccordionPanel pb={4}>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                        commodo consequat.
+                                    <div className="container" style={{maxHeight:"20vh",overflowY:"scroll"}}>
+                                        {
+                                            Object.keys(MFRecommendData).map((data)=>{
+                                                return(
+                                                    <>
+                                                        <h5>{data} : {MFRecommendData[data] * 100}%</h5>
+                                                    </>
+                                                )
+                                            })
+                                        }
+                                        </div>
                                     </AccordionPanel>
                                 </AccordionItem>
                             </Accordion>

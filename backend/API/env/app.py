@@ -190,7 +190,7 @@ def recommendMF():
     beta_vec = mom_generator.calc_beta(benchmark)
     PortOpt = Optimizer(mu_return, cov_matrix, beta_vec)
     PortOpt.add_objective("min_volatility")
-    PortOpt.add_constraint("weight", weight_bound=(-1,1), leverage=1) # Portfolio Long/Short
+    PortOpt.add_constraint("weight", weight_bound=(0,1), leverage=1) # Portfolio Long/Short
     PortOpt.add_constraint("concentration", top_holdings=5, top_concentration=0.5)
     PortOpt.solve()
     weight_dict, metric_dict = PortOpt.summary(risk_free=riskFree, market_return=marketReturn, top_holdings=5)
