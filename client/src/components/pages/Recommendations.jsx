@@ -36,13 +36,22 @@ import {
     TableCaption,
     TableContainer,
 } from '@chakra-ui/react'
+import Pie from '../dashComponents/Pie';
+import {
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
+    Box
+  } from '@chakra-ui/react'
 
 
 const auth = getAuth();
 
 
 
-const Dashboard = () => {
+const Recommendations = () => {
 
 
     const navigate = useNavigate();
@@ -57,6 +66,9 @@ const Dashboard = () => {
     const [pieData, setPieData] = useState({});
     const [pieDataLoading, setPieDataLoading] = useState(true);
     const [pieChartData, setPieChartData] = useState([]);
+    const [riskFree,setRiskFree] = useState(0);
+    const [marketReturn,setMarketReturn] = useState(0);
+
     // alert
     const { isOpen, onOpen, onClose } = useDisclosure()
     const cancelRef = React.useRef()
@@ -216,7 +228,7 @@ const Dashboard = () => {
 
     const fetchData2 = async (data) => {
 
-        await axios.get(`https://nehaarane-fictional-meme-74jx6x66qjxfvqg-5000.preview.app.github.dev/risk-calculation/${data}`)
+        await axios.get(`https://vedxpatel-stunning-xylophone-9xpq5pwjrr7f9rgw-5000.preview.app.github.dev/risk-calculation/${data}`)
             .then(async (response) => {
                 console.log(`Portfolio segregated: ${response.data}`);
                 // setPieData(response.data);
@@ -288,6 +300,18 @@ const Dashboard = () => {
 
 
     console.log(formData);
+
+    useEffect(()=>{
+
+        const fetchStocksData = async() =>{
+            const response = await axios.get("https://vedxpatel-stunning-xylophone-9xpq5pwjrr7f9rgw-5000.preview.app.github.dev/recommendStock/")
+            console.log(response.data);
+        }
+        fetchStocksData();
+    },[])
+
+
+
 
 
     return (
@@ -401,7 +425,68 @@ const Dashboard = () => {
                     </div>
                     <div className="col-md-auto" style={{ width: "54vw" }}>
                         <h2 style={{ color: "white", marginBottom: "5vh", color: "white", position: "relative", top: "1.5vh", fontWeight: "bold", marginTop: "2vh" }}>Recommendations</h2>
-
+                        <div className="container" style={{ margin: 0, padding: 0, width: "80vw" }}>
+                            <div className="row">
+                                <div className="col-md-auto">
+                                    <div className="container" style={{ background: "#2A2A2D", minHeight: "35vh", width: "34vw", borderRadius: "20px" }} >
+                                        {console.log(pieChartData)}
+                                        <div className="row" style={{ display: "flex" }}>
+                                            <div className="container" style={{ height: "35vh", float: "left" }}>
+                                                <Pie data={pieChartData} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-auto">
+                                    <div className="container" style={{ background: "#2A2A2D", minHeight: "35vh", width: "34vw", borderRadius: "20px" }}>
+                                        <Wrap style={{ float: "right" }}>
+                                            {
+                                                Object.keys(pieData).map((keyName, i) => (
+                                                    <WrapItem>
+                                                        <Stat key={i} style={{ color: "white", marginRight: "2vw" }} >
+                                                            <StatLabel>{keyName}</StatLabel>
+                                                            <StatNumber>{pieData[keyName]} %</StatNumber>
+                                                        </Stat>
+                                                    </WrapItem>
+                                                ))
+                                            }
+                                        </Wrap>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="container" style={{ minHeight: "35vh", background: "#2A2A2D", borderRadius: "20px", width: "70vw", margin: 0, marginTop: "3vh",color:"white",padding:"5vh" }}>
+                            <Accordion defaultIndex={[0]} allowMultiple>
+                                <AccordionItem>
+                                    <h2>
+                                        <AccordionButton>
+                                            <Box as="span" flex='1' textAlign='left'>
+                                                Stocks
+                                            </Box>
+                                            <AccordionIcon />
+                                        </AccordionButton>
+                                    </h2>
+                                    <AccordionPanel pb={4}>
+                                    </AccordionPanel>
+                                </AccordionItem>
+                                <AccordionItem>
+                                    <h2>
+                                        <AccordionButton>
+                                            <Box as="span" flex='1' textAlign='left'>
+                                                Mutual Funds
+                                            </Box>
+                                            <AccordionIcon />
+                                        </AccordionButton>
+                                    </h2>
+                                    <AccordionPanel pb={4}>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                        commodo consequat.
+                                    </AccordionPanel>
+                                </AccordionItem>
+                            </Accordion>
+                        </div>
                     </div>
                 </div>
 
@@ -410,4 +495,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard
+export default Recommendations

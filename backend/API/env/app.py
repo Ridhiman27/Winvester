@@ -26,6 +26,7 @@ top_headlines = newsapi.get_top_headlines(category='business',country='in')
 #** http://0.0.0.0:5000/news
 @app.route('/news')
 def news():
+    # return 0
     return top_headlines
 
 
