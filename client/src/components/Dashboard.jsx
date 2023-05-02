@@ -221,7 +221,7 @@ const Dashboard = () => {
 
   const fetchData2 = async (data) => {
 
-    await axios.get(`https://nehaarane-fictional-meme-74jx6x66qjxfvqg-5000.preview.app.github.dev/risk-calculation/${data}`)
+    await axios.get(`https://vedxpatel-stunning-xylophone-9xpq5pwjrr7f9rgw-5000.preview.app.github.dev/risk-calculation/${data}`)
       .then(async (response) => {
         console.log(`Portfolio segregated: ${response.data}`);
         // setPieData(response.data);
