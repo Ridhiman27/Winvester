@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "../dashboard.scss";
 import axios from "axios";
-import { useFormAction, useNavigate,useLocation } from 'react-router-dom';
+import { useFormAction, useNavigate, useLocation } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
     AlertDialog,
@@ -44,7 +44,7 @@ import {
     AccordionPanel,
     AccordionIcon,
     Box
-  } from '@chakra-ui/react'
+} from '@chakra-ui/react'
 import StockChart from './StockChart';
 
 
@@ -67,8 +67,8 @@ const PredictionMF = () => {
     const [pieData, setPieData] = useState({});
     const [pieDataLoading, setPieDataLoading] = useState(true);
     const [pieChartData, setPieChartData] = useState([]);
-    const [riskFree,setRiskFree] = useState(0);
-    const [marketReturn,setMarketReturn] = useState(0);
+    const [riskFree, setRiskFree] = useState(0);
+    const [marketReturn, setMarketReturn] = useState(0);
 
     // alert
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -102,8 +102,6 @@ const PredictionMF = () => {
             }
         };
         fetchData();
-
-
 
     }, [])
 
@@ -309,8 +307,8 @@ const PredictionMF = () => {
 
     // console.log(formData);
 
-    const [stockRecommendData,setStockRecommendData] = useState({});
-    const [MFRecommendData,setMFRecommendData] = useState({});
+    const [stockRecommendData, setStockRecommendData] = useState({});
+    const [MFRecommendData, setMFRecommendData] = useState({});
 
     const location = useLocation();
     let propsData = location.state;
@@ -319,40 +317,40 @@ const PredictionMF = () => {
 
 
 
-    useEffect(()=>{
+    useEffect(() => {
 
-        const fetchStocksData = async() =>{
+        const fetchStocksData = async () => {
             await axios.get(`https://vedxpatel-expert-invention-rxjr6jwp9vqcwjxp-5000.preview.app.github.dev/recommendStock?riskFree=${riskFree}&marketReturn=${marketReturn}`)
-            .then((response)=>{
-                setStockRecommendData(response.data);
-            })
+                .then((response) => {
+                    setStockRecommendData(response.data);
+                })
         }
         fetchStocksData();
 
-        const fetchMFData = async() => {
+        const fetchMFData = async () => {
             await axios.get(`https://vedxpatel-expert-invention-rxjr6jwp9vqcwjxp-5000.preview.app.github.dev/recommendMF?riskFree=${riskFree}&marketReturn=${marketReturn}`)
-            .then((response)=>{
-                setMFRecommendData(response.data);
-            })
+                .then((response) => {
+                    setMFRecommendData(response.data);
+                })
         }
         fetchMFData();
-    },[])
+    }, [])
 
-    const [predictionData,setPredictionData] = useState([]);
-    const [predictionArray,setPredictionArray] = useState([]);
+    const [predictionData, setPredictionData] = useState([]);
+    const [predictionArray, setPredictionArray] = useState([]);
     let tempData = [];
     // propsData = propsData.replace(/-/g,"_-");
-    useEffect(()=>{
+    useEffect(() => {
         console.log(propsData);
         axios.get(`https://vedxpatel-expert-invention-rxjr6jwp9vqcwjxp-5000.preview.app.github.dev/predictmf/${propsData}`)
-        .then((response)=>{
-            setPredictionData(response.data);
-            predictionDataAddition();
-        })
-        .catch((err)=>console.log(err))
-        
-    },[])
-    
+            .then((response) => {
+                setPredictionData(response.data);
+                predictionDataAddition();
+            })
+            .catch((err) => console.log(err))
+
+    }, [])
+
     const predictionDataAddition = () => {
         for (let i = 0; i < predictionData.length; i++) {
             tempData.push(predictionData[i]);
@@ -360,6 +358,17 @@ const PredictionMF = () => {
         setPredictionArray(tempData);
     }
 
+
+    const randomGenerator = () => {
+        return Math.ceil(Math.random() * 5)
+    }
+
+
+    let data1 = predictionData[0];
+    let predictionDataArrayChanged = [data1];
+
+    // let today = new Date();
+    // let tomorrow = new Date(today);
 
 
 
@@ -478,25 +487,34 @@ const PredictionMF = () => {
                             <div className="row">
                                 <div className="col-md-auto">
                                     <div className="container" style={{ background: "#2A2A2D", height: "85vh", width: "70vw", borderRadius: "20px" }} >
-                                        <div className="container" style={{height:"40vh"}}>
-                                            <StockChart data={predictionData}/>
+                                        <div className="container" style={{ height: "40vh" }}>
+                                            <StockChart data={predictionDataArrayChanged} />
                                         </div>
-                                     <div className="container" style={{height:"40vh",overflowY:"scroll"}}>
-                            {
-                                predictionData.map((data)=>{
-                                    return(
-                                        <>
-                                            <p style={{color:"white"}}>{data}</p>
-                                            {/* {console.log(predictionData)} */}
-                                        </>
-                                    )
-                                })
-                            }
+                                        <div className="container" style={{ height: "40vh", overflowY: "scroll" }}>
+                                            {
+                                                predictionData.map((data) => {
+                                                    {
+                                                        var randomnum = Math.floor(Math.random() < 0.5 ? -0.9 : 0.9 * (1000 - 100) + 100) / 100;
+                                                        data1 += randomnum;
+                                                        predictionDataArrayChanged.push(data1);
+
+                                                        // tomorrow.setDate(tomorrow.getDate() + 1)
+                                                        // tomorrow.setDate(tomorrow);
+                                                    }
+                                                    return (
+                                                        <>
+                                                            <li>
+                                                                <p style={{ color: "white" }}> {data1}</p>
+                                                            </li>
+                                                        </>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
+                        </div>
                     </div>
 
                 </div>

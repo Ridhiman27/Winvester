@@ -207,7 +207,7 @@ def predictstock(name):
     model = pickle.load(open("../Model/Stocks/"+name, 'rb'))
 
     #prediction for 60 days
-    prediction = model.predict(n_periods=60)
+    prediction = model.predict(n_periods=1000)
 
     pred_lst = prediction.tolist()
 

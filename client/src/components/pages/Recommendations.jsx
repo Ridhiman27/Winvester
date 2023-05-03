@@ -460,7 +460,7 @@ const Recommendations = () => {
                                     </div>
                                 </div>
                                 <div className="col-md-auto">
-                                    <div className="container" style={{ background: "#2A2A2D", minHeight: "35vh", width: "34vw", borderRadius: "20px" }}>
+                                    <div className="container" style={{ background: "#2A2A2D", minHeight: "35vh", width: "34vw", borderRadius: "20px",padding:"5vh" }}>
                                         <Wrap style={{ float: "right" }}>
                                             {
                                                 Object.keys(pieData).map((keyName, i) => (

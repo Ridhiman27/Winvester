@@ -9,7 +9,7 @@ function StockChart(props) {
         dataArray.push(props.data[i]); 
     }
     console.log(Array.isArray(dataArray));
-    dataArray = dataArray.slice(1,10)
+    dataArray = dataArray.slice(1,200)
 
     var options = {
         chart: {

@@ -484,7 +484,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="col-md-auto">
-            <h3 style={{ color: "white", marginBottom: "5vh", color: "white", position: "relative", top: "1.5vh", fontWeight: "bold", marginTop: "2vh" }}>Ridhiman</h3>
+            <h3 style={{ color: "white", marginBottom: "5vh", color: "white", position: "relative", top: "1.5vh", fontWeight: "bold", marginTop: "2vh" }}></h3>
             <div className="assets-container" style={{ marginTop: "9.5vh" }}>
               <h4 style={{ color: "white", position: "relative", top: "1.5vh", left: "1.5vw" }}>Assets</h4>
               <ul >
