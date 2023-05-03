@@ -221,7 +221,7 @@ const Dashboard = () => {
 
   const fetchData2 = async (data) => {
     console.log(data);
-    await axios.get(`https://vedxpatel-expert-invention-rxjr6jwp9vqcwjxp-5000.preview.app.github.dev/risk-calculation/${data}`)
+    await axios.get(`https://nehaarane-glowing-disco-jwpgvgvvprr3pw4g-5000.preview.app.github.dev//risk-calculation/${data}`)
       .then(async (response) => {
         console.log(`Portfolio segregated: ${response.data}`);
         // setPieData(response.data);
@@ -484,7 +484,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="col-md-auto">
-            <h3 style={{ color: "white", marginBottom: "5vh", color: "white", position: "relative", top: "1.5vh", fontWeight: "bold", marginTop: "2vh" }}></h3>
+            <h3 style={{ color: "white", marginBottom: "5vh", color: "white", position: "relative", top: "1.5vh",left:"10vw", fontWeight: "bold", marginTop: "2vh" }}>User</h3>
             <div className="assets-container" style={{ marginTop: "9.5vh" }}>
               <h4 style={{ color: "white", position: "relative", top: "1.5vh", left: "1.5vw" }}>Assets</h4>
               <ul >

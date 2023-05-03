@@ -86,7 +86,7 @@ const Suggestions = () => {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    axios.get("https://vedxpatel-expert-invention-rxjr6jwp9vqcwjxp-5000.preview.app.github.dev/news")
+    axios.get("https://nehaarane-glowing-disco-jwpgvgvvprr3pw4g-5000.preview.app.github.dev//news")
       .then((response) => { setNews(response.data.articles); console.log(response.data.articles) })
       .catch((err) => console.log(err))
   }, [])
