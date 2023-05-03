@@ -219,6 +219,9 @@ def predictstock(name):
 def predictmf(name):
 
     #TODO:Adjust the name according to the name of the csv
+    lst_name = name.split(" ")
+    name = ("_").join(lst_name)
+    
     model = pickle.load(open("../Model/MF/"+name, 'rb'))
 
     prediction = model.predict(n_periods=100)
