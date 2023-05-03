@@ -236,7 +236,7 @@ const Prediction = () => {
 
     const fetchData2 = async (data) => {
 
-        await axios.get(`https://nehaarane-glowing-disco-jwpgvgvvprr3pw4g-5000.preview.app.github.dev//risk-calculation/${data}`)
+        await axios.get(`http://localhost:5000/risk-calculation/${data}`)
             .then(async (response) => {
                 // console.log(`Portfolio segregated: ${response.data}`);
                 // setPieData(response.data);
@@ -322,7 +322,7 @@ const Prediction = () => {
     useEffect(() => {
 
         const fetchStocksData = async () => {
-            await axios.get(`https://nehaarane-glowing-disco-jwpgvgvvprr3pw4g-5000.preview.app.github.dev//recommendStock?riskFree=${riskFree}&marketReturn=${marketReturn}`)
+            await axios.get(`http://localhost:5000/recommendStock?riskFree=${riskFree}&marketReturn=${marketReturn}`)
                 .then((response) => {
                     setStockRecommendData(response.data);
                 })
@@ -330,7 +330,7 @@ const Prediction = () => {
         fetchStocksData();
 
         const fetchMFData = async () => {
-            await axios.get(`https://nehaarane-glowing-disco-jwpgvgvvprr3pw4g-5000.preview.app.github.dev//recommendMF?riskFree=${riskFree}&marketReturn=${marketReturn}`)
+            await axios.get(`http://localhost:5000/recommendMF?riskFree=${riskFree}&marketReturn=${marketReturn}`)
                 .then((response) => {
                     setMFRecommendData(response.data);
                 })
@@ -343,7 +343,7 @@ const Prediction = () => {
     let tempData = [];
     useEffect(() => {
 
-        axios.get(`https://nehaarane-glowing-disco-jwpgvgvvprr3pw4g-5000.preview.app.github.dev//predictstock/${propsData}`)
+        axios.get(`http://localhost:5000/predictstock/${propsData}`)
             .then((response) => {
                 setPredictionData(response.data);
                 predictionDataAddition();
