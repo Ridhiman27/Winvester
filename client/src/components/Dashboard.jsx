@@ -200,17 +200,17 @@ const Dashboard = () => {
       console.log(riskScore);
 
 
-      if (riskScore < 25) {
-        setTmp("low");
-      } else if (riskScore >= 25 && riskScore < 50) {
-        setTmp("moderate")
+      if ( riskScore < 50) {
+        setTmp("low")
       } else if (riskScore >= 50 && riskScore < 75) {
-        setTmp("high")
-      } else {
+        setTmp("moderate")
+      } else if (riskScore >= 75 && riskScore < 90) {
+        setTmp("high");
+      } else{
         setTmp("very high");
       }
 
-      if (tmp.length > 0) {
+      if (tmp) {
         fetchData2(tmp);
       }
 
@@ -220,7 +220,7 @@ const Dashboard = () => {
 
 
   const fetchData2 = async (data) => {
-
+    console.log(data);
     await axios.get(`https://vedxpatel-expert-invention-rxjr6jwp9vqcwjxp-5000.preview.app.github.dev/risk-calculation/${data}`)
       .then(async (response) => {
         console.log(`Portfolio segregated: ${response.data}`);

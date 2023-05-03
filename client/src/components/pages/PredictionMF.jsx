@@ -342,7 +342,6 @@ const PredictionMF = () => {
     const [predictionArray,setPredictionArray] = useState([]);
     let tempData = [];
     // propsData = propsData.replace(/-/g,"_-");
-    propsData = propsData.replace(/ /g,"_");
     useEffect(()=>{
         console.log(propsData);
         axios.get(`https://vedxpatel-expert-invention-rxjr6jwp9vqcwjxp-5000.preview.app.github.dev/predictmf/${propsData}`)

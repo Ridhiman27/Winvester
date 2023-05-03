@@ -8,6 +8,7 @@ import flask_cors
 import json
 from pymarkowitz import *
 from newsapi import NewsApiClient
+import joblib
 
 app = Flask(__name__)
 flask_cors.CORS(app)
@@ -205,8 +206,8 @@ def predictstock(name):
 
     model = pickle.load(open("../Model/Stocks/"+name, 'rb'))
 
-    #prediction for 1000 days
-    prediction = model.predict(n_periods=1000)
+    #prediction for 60 days
+    prediction = model.predict(n_periods=60)
 
     pred_lst = prediction.tolist()
 
@@ -217,14 +218,18 @@ def predictstock(name):
 #**: http://0.0.0.0:5000/predictmf/name
 @app.route('/predictmf/<name>',methods=['GET'])
 def predictmf(name):
-
+    print(name)
     #TODO:Adjust the name according to the name of the csv
     lst_name = name.split(" ")
-    name = ("_").join(lst_name)
-    
-    model = pickle.load(open("../Model/MF/"+name, 'rb'))
+    mname = ("_").join(lst_name)
 
-    prediction = model.predict(n_periods=100)
+    print(mname)
+
+    
+    # model = pickle.load(open("../Model/MF/"+name, 'rb'))
+    model = joblib.load('../Model/MF/' + name)
+
+    prediction = model.predict(n_periods=60)
 
     pred_lst = prediction.tolist()
 
