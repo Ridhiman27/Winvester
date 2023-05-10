@@ -86,7 +86,7 @@ const Suggestions = () => {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/news")
+    axios.get("https://nehaarane-crispy-trout-gwvpjpjjgjr397p9-5000.preview.app.github.dev/news")
       .then((response) => { setNews(response.data.articles); console.log(response.data.articles) })
       .catch((err) => console.log(err))
   }, [])

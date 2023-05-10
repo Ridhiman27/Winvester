@@ -236,7 +236,7 @@ const Recommendations = () => {
 
     const fetchData2 = async (data) => {
 
-        await axios.get(`http://localhost:5000/risk-calculation/${data}`)
+        await axios.get(`https://nehaarane-crispy-trout-gwvpjpjjgjr397p9-5000.preview.app.github.dev/risk-calculation/${data}`)
             .then(async (response) => {
                 console.log(`Portfolio segregated: ${response.data}`);
                 // setPieData(response.data);
@@ -315,7 +315,7 @@ const Recommendations = () => {
     useEffect(()=>{
 
         const fetchStocksData = async() =>{
-            await axios.get(`http://localhost:5000/recommendStock?riskFree=${riskFree}&marketReturn=${marketReturn}`)
+            await axios.get(`https://nehaarane-crispy-trout-gwvpjpjjgjr397p9-5000.preview.app.github.dev/recommendStock?riskFree=${riskFree}&marketReturn=${marketReturn}`)
             .then((response)=>{
                 console.log(response.data);
                 setStockRecommendData(response.data);
@@ -324,7 +324,7 @@ const Recommendations = () => {
         fetchStocksData();
 
         const fetchMFData = async() => {
-            await axios.get(`http://localhost:5000/recommendMF?riskFree=${riskFree}&marketReturn=${marketReturn}`)
+            await axios.get(`https://nehaarane-crispy-trout-gwvpjpjjgjr397p9-5000.preview.app.github.dev/recommendMF?riskFree=${riskFree}&marketReturn=${marketReturn}`)
             .then((response)=>{
                 console.log(response.data);
                 setMFRecommendData(response.data);
@@ -446,10 +446,10 @@ const Recommendations = () => {
                             </ol>
                         </div>
                     </div>
-                    <div className="col-md-auto" style={{ width: "54vw" }}>
+                    <div className="col-md-auto" style={{ width: "80vw" }}>
                         <h2 style={{ color: "white", marginBottom: "5vh", color: "white", position: "relative", top: "1.5vh", fontWeight: "bold", marginTop: "2vh" }}>Recommendations</h2>
                         <div className="container" style={{ margin: 0, padding: 0, width: "80vw" }}>
-                            <div className="row">
+                            <div className="row" style={{width:"75vw"}}>
                                 <div className="col-md-auto">
                                     <div className="container" style={{ background: "#2A2A2D", minHeight: "35vh", width: "34vw", borderRadius: "20px" }} >
                                         <div className="row" style={{ display: "flex" }}>
