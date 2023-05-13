@@ -1,3 +1,4 @@
 node_modules
 .env
 client/src/components/pages/Brokers.jsx
+.vercel
