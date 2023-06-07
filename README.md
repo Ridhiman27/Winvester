@@ -33,24 +33,34 @@ Features in the final product include a choice between different assets and inve
 
 5.) Portfolio Curation will be based on certain algorithms which will include past performances of the assets throughout their inception. 
 
-### Flow Diagram
-![image](https://user-images.githubusercontent.com/93005927/228363010-d66da171-05c4-4d0a-a259-cb6655a975e8.png)
 
 ### Architecture
 ![image](https://github.com/Ridhiman27/Winvester/assets/93005927/0197b041-0d1b-4d4c-8ee7-d20b62676d3b)
 
+
+### Flow Diagram
+![image](https://user-images.githubusercontent.com/93005927/228363010-d66da171-05c4-4d0a-a259-cb6655a975e8.png)
+
 ### Requirements
 Hardware Requirements: 
+
 Development: A laptop/computer with a dedicated GPU, 
+
 Client: A device with a browser.
+
 Software Requirements: A device with an active internet and supporting browser installed. 
 
 ### References
 [1] Mazin A.M. Al Janabi , Román Ferrer , Syed Jawad Hussain Shahzad, Liquidity-adjusted value-at-risk optimization of a multi-asset portfolio using a vine copula approach,West Azerbaijan, Iran, 2019.
+
 [2] Hadi Rezaei , Hamidreza Faaljou , Gholamreza Mansourfar, Intelligent Asset Allocation using Predictions of Deep Frequency Decomposition, 2021.
+
 [3] Kei Nakagawa, Yoshiyuki Suimon, Inflation rate tracking portfolio optimization method: Evidence from Japan, Tokyo,Japan,  2022
+
 [4] Robert A. Jarrow, High frequency trading and standard asset pricing models, 2022.
+
 [5] Junkyu Jang , NohYoon Seong, Deep reinforcement learning for stock portfolio optimization by connecting with modern portfolio theory , 2023.
+
 [6] Bo Li a,, Qi Wang , Yuan Yu , Meng-Ze Sun , Liang-Xia Chen , Zhong-Liang Xiang, Feng Zhao , Qing-Cong Lv , Zhi-Yong An, A novel risk-control model for the online portfolio selection of high-frequency transactions, 2022.
 
 
