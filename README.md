@@ -1,5 +1,8 @@
-![Screenshot (1060)](https://github.com/Ridhiman27/Winvester/assets/93005927/a56a01ef-3466-48d1-aed0-5429e46f36cb)# Winvester
-A platform for recommending your investment portfolio for stocks, mutual funds, real estate and other assets
+
+# Winvester
+A platform for recommending your investment portfolio for stocks, mutual funds, real estate, and other assets
+![Screenshot (1088)](https://github.com/Ridhiman27/Winvester/assets/93005927/c83cd4e2-86c1-4c9d-84a9-6480a6b75973)
+
 
 ### Motivation
 Diversification of assets and different investment instruments is necessary to have a low-risk investment portfolio. 
@@ -8,18 +11,18 @@ Diversification of assets requires study/research regarding that asset depth. Ne
 There are a lot of perks to investing in the right asset at the right time and to empower and help people in investing we decided to build this application.
 
 ### Problem Statement
-A system that can suggest you an investment  portfolio based on your risk appetite, funds to be  invested, and profit you would like to see in the  future. For this, we are assessing the risks involved  and the profits made by the investments using  historical data and for some of the investments, it  is real-time data. We are trying to create a system  that can suggest a diverse portfolio with minimal  research by the users. Some of the investments  include government schemes, mutual funds, forex,  stock market, land, gold, commodities, etc. We will  also be looking toward tax-saving investments.
+A system that can suggest you an investment portfolio based on your risk appetite, funds to be invested, and profit you would like to see in the future. For this, we are assessing the risks involved and the profits made by the investments using historical data and for some of the investments, it is real-time data. We are trying to create a system that can suggest a diverse portfolio with minimal research by the users. Some of the investments include government schemes, mutual funds, forex,  stock market, land, gold, commodities, etc. We will also be looking toward tax-saving investments.
 
 ### Objectives
 1.) To enable users to curate a portfolio based on their risk appetite and the amount of capital they have.
 
 2.) Features in the final product will include a choice between different assets and investing options and suggestions.
 
-3.) To develop algorithms specified to different assets and incorporate into the application in order to ensure minimum risk and maximum profit.
+3.) To develop algorithms specified to different assets and incorporate them into the application in order to ensure minimum risk and maximum profit.
 
 4.) To assess the overall market sentiment related to a particular asset and combining it with strong fundamentals.
 
-5.) To reduce the user involvement, effort and time required to research about an asset by recommendation.
+5.) To reduce the user involvement, effort, and time required to research an asset by recommendation.
 
 ### Scope
 1.) Assets such as stocks, mutual funds, real estate, public funds, ETFs, and other options will be included for the users to get suggestions from
@@ -31,7 +34,7 @@ Features in the final product include a choice between different assets and inve
  
 4.) The investors will be able to diversify their portfolio within minutes and get their portfolio curated and diversified.
 
-5.) Portfolio Curation will be based on certain algorithms which will include past performances of the assets throughout their inception. 
+5.) Portfolio Curation will be based on certain algorithms, including past performances of the assets throughout their inception. 
 
 
 ### Flow Diagram
@@ -42,25 +45,41 @@ Features in the final product include a choice between different assets and inve
 
 ### UI
 1.) The Landing Page
-![Screenshot (1056)](https://github.com/Ridhiman27/Winvester/assets/93005927/d49d0e08-d573-40fd-9af1-bbc81e8c9448)
-![Screenshot (1057)](https://github.com/Ridhiman27/Winvester/assets/93005927/4eb41a45-48f3-44ca-bbad-cce87af199e5)
-![Screenshot (1058)](https://github.com/Ridhiman27/Winvester/assets/93005927/57c803e2-7a11-47ae-b93a-367297166d58)
-![Screenshot (1059)](https://github.com/Ridhiman27/Winvester/assets/93005927/86ec7ee1-63c3-4526-b544-03f2b86c7791)
-![Screenshot (1060)](https://github.com/Ridhiman27/Winvester/assets/93005927/2ef0dc30-5a96-4b05-8975-760cb7bf4310)
+![Screenshot (1088)](https://github.com/Ridhiman27/Winvester/assets/93005927/31afab8d-742a-41ab-92da-607208ffede9)
+![Screenshot (1089)](https://github.com/Ridhiman27/Winvester/assets/93005927/ffa186ab-b3df-412d-bf2b-ffe3557cc400)
+![Screenshot (1094)](https://github.com/Ridhiman27/Winvester/assets/93005927/6f4cddf9-03b2-4b8d-a19f-d69a7dfaf843)
+![Screenshot (1095)](https://github.com/Ridhiman27/Winvester/assets/93005927/27e39bee-5586-4621-a7f2-e57c71e91a6c)
+![Screenshot (1096)](https://github.com/Ridhiman27/Winvester/assets/93005927/79cd9c8a-1c57-4b14-ae74-d6b0ce893d2d)
 
 2.) The Navigation Page
-![Screenshot (1061)](https://github.com/Ridhiman27/Winvester/assets/93005927/162879fd-1728-4984-8608-886fb3f290e7)
+![Screenshot (1098)](https://github.com/Ridhiman27/Winvester/assets/93005927/30129985-7182-4bd8-adb6-1ab211551b02)
 
 3.) The Login and Signup Page
-![Screenshot (1062)](https://github.com/Ridhiman27/Winvester/assets/93005927/881c8c2f-e5ce-481d-a90d-4f7d56061101)
+![Screenshot (1098)](https://github.com/Ridhiman27/Winvester/assets/93005927/c01fb1e9-d8fd-4c90-a7ff-773ed3b87767)
 
 4.) The Questionnaire
-![Screenshot (1063)](https://github.com/Ridhiman27/Winvester/assets/93005927/0e776edf-0db3-4eb5-9c93-737aa5014127)
-![Screenshot (1064)](https://github.com/Ridhiman27/Winvester/assets/93005927/36688390-f8ad-4c60-803e-136453ad5952)
-![Screenshot (1065)](https://github.com/Ridhiman27/Winvester/assets/93005927/26309b1d-217f-4dc3-96d4-b6eff037b0d9)
-![Screenshot (1066)](https://github.com/Ridhiman27/Winvester/assets/93005927/c11f3fb0-eb7e-42e4-8ca5-2d41d92cfc69)
-![Screenshot (1067)](https://github.com/Ridhiman27/Winvester/assets/93005927/08d9cd6d-1152-400a-b962-f779b69f66db)
+![Screenshot (1099)](https://github.com/Ridhiman27/Winvester/assets/93005927/dec4dcf4-3dac-4be7-b3ae-b7bf444e81f9)
+![Screenshot (1100)](https://github.com/Ridhiman27/Winvester/assets/93005927/7a1f6b0e-15f7-4f05-84e3-205d8c8e545b)
+![Screenshot (1101)](https://github.com/Ridhiman27/Winvester/assets/93005927/23b70342-eb1f-4e1e-ba56-016d738c0753)
+![Screenshot (1102)](https://github.com/Ridhiman27/Winvester/assets/93005927/0795ed08-3f70-4b1f-b1e4-cdb901ee0a76)
+![Screenshot (1103)](https://github.com/Ridhiman27/Winvester/assets/93005927/24793036-e77b-47a2-9195-82c2282d59a5)
 
+5.) Dashboard
+i.) This is an investment calculator where you can calculate estimated returns and a brief description of winvester.
+![Screenshot (1104)](https://github.com/Ridhiman27/Winvester/assets/93005927/7f632b8e-420d-471b-b708-6cd819892b64)
+
+ii.) This is the news section where you can see the latest news in the business world.
+![Screenshot (1105)](https://github.com/Ridhiman27/Winvester/assets/93005927/0f4a2431-9c19-4a1a-b92f-c2d4279157b4)
+
+iii.) This is the section where the risk is calculated and the assets diversification of the assets.
+![Screenshot (1106)](https://github.com/Ridhiman27/Winvester/assets/93005927/5f8cca5f-7ee0-4d78-b331-12f920f04acb)
+
+iv.) This is the recommendation page where the stocks and mutual funds are recommended.
+![Screenshot (1107)](https://github.com/Ridhiman27/Winvester/assets/93005927/e22e0f7e-0a84-4a08-9844-64b9126edb19)
+![Screenshot (1108)](https://github.com/Ridhiman27/Winvester/assets/93005927/e1d2f549-744e-4a8a-b783-2e2424096df2)
+
+v.) This is the prediction and forecasting page for the selected stock/MF.
+![Screenshot (1109)](https://github.com/Ridhiman27/Winvester/assets/93005927/053d9cb4-7b8e-4599-a525-3e06da4b00c0)
 
 
 ### Requirements
