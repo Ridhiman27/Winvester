@@ -1,0 +1,8 @@
+flask
+pandas
+numpy
+flask_cors
+scipy
+pymarkowitz
+newsapi
+pmdarima

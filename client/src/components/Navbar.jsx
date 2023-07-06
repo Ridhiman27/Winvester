@@ -10,7 +10,6 @@ export default function Navbar() {
  
     const handleLogout = () => {               
         signOut(auth).then(() => {
-        // Sign-out successful.
             navigate("/login");
             console.log("Signed out successfully")
         }).catch((error) => {
